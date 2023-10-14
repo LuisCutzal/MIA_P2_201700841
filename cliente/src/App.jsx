@@ -2,12 +2,13 @@ import { Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Reporte from "./pages/Reporte"
+import Tarjeta from "./pages/Tarjeta"
 
 function App() {
   
   return (
     <>
-    <div className="bg-primary h-screen" >
+    <div className="bg-primary min-h-screen" >
       <Routes>
         <Route 
         path="/"
@@ -20,6 +21,10 @@ function App() {
         <Route
         path="/reporte"
         element={<Reporte/>}
+        />
+        <Route
+        path="/tarjeta"
+        element={<Tarjeta/>}
         />
       </Routes>
     </div>

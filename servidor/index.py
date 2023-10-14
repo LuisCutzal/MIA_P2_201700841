@@ -1,10 +1,22 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify, request
+from flask_cors import CORS  
+from MIA_P1.readData import readData
 
 app = Flask(__name__)
+CORS(app)
+
 
 @app.route("/")
 def hello_world():
-    return render_template("index.html")
+    return jsonify({'message': 'Hello, World!'})
+
+
+@app.route("/api", methods=['POST'])
+def execute():
+    data = request.get_json()
+    entry_value = data.get('entry')
+    response = readData(entry_value)
+    return jsonify({'salida':response})
 
 if __name__ == '__main__':
     app.run()
