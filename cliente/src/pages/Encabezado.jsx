@@ -19,14 +19,14 @@ function Encabezado({ Contenido, Ejecutar }) {
 
     return (
         <div className="flex items-center h-7 gap-5 justify-between p-5">
-            <input className="bg-gray-500 border-2 rounded-md hover:border-black" type="File"
+            <input className="text-2xl  bg-gray-500 border-2 rounded-md hover:border-black" type="File"
                 onChange={handleFileSelected}
             ></input>
             <button
-                className="bg-warning px-8 border-2 rounded-md hover:border-third"
+                className="text-3xl  bg-warning px-8 border-2 rounded-md hover:border-third"
                 onClick={Ejecutar} >
                 Ejecutar </button>
-            <button className="bg-warning px-8 border-2 rounded-md hover:border-third"
+            <button className="text-3xl bg-warning px-8 border-2 rounded-md hover:border-third"
                 onClick={handleLogin}
             > Iniciar Sesión</button>
         </div>

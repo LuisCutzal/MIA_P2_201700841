@@ -13,10 +13,15 @@ def hello_world():
 
 @app.route("/api", methods=['POST'])
 def execute():
-    data = request.get_json()
-    entry_value = data.get('entry')
+    try:
+        data = request.get_json()
+        entry_value = data.get('entry')
+    except:
+        # Si no se pudo obtener JSON, asumir que es texto plano y tomarlo directamente del cuerpo de la solicitud
+        entry_value = request.data.decode('utf-8')
+
     response = readData(entry_value)
-    return jsonify({'salida':response})
+    return jsonify({'salida': response})
 
 if __name__ == '__main__':
     app.run()

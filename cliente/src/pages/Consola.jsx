@@ -9,8 +9,8 @@ function Consola({contenido, Contenido, esEditable = true}){
     }
 
     return(
-        <div className=" h-1/2 p-2">
-            <textarea className="w-full h-full resize-none bg-black text-white p-3"
+        <div className="h-1/2 p-2">
+            <textarea className="w-full h-full resize-none bg-black text-white p-3 text-4xl"
             value={contenido}
             onChange={handleTextAreaChange}
             readOnly={esEditable ? false : true}

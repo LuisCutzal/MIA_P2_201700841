@@ -16,7 +16,7 @@ const Reporte = () => {
         'https://picsum.photos/id/107/5000/3333',
     ];
     return (
-        <div className="text-center">
+        <div className="text-center bg-primary">
             <h1 className="text-2xl font-bold text-white ">Reportes</h1>
             <div className="grid grid-cols-3 gap-4">
                 {imagenes.map((imagen, index) => (

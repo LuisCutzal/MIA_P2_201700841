@@ -8,7 +8,7 @@ function App() {
   
   return (
     <>
-    <div className="bg-primary min-h-screen" >
+    <div className="bg-primary h-screen" >
       <Routes>
         <Route 
         path="/"
