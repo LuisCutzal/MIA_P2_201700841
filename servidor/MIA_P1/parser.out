@@ -66,8 +66,6 @@ Rule 60    listaparametros_mkfs -> listaparametros_mkfs parametromkfs
 Rule 61    listaparametros_mkfs -> parametromkfs
 Rule 62    parametromkfs -> GUION parametroid
 Rule 63    parametromkfs -> GUION parametrotype
-Rule 64    parametromkfs -> GUION parametrofs
-Rule 65    parametrofs -> FS IGUAL FORMATEAR
 
 Terminals, with rules where they appear
 
@@ -78,12 +76,10 @@ DELETE               : 51
 EXECUTE              : 13
 FDISK                : 37
 FIT                  : 26
-FORMATEAR            : 65
-FS                   : 65
-GUION                : 13 17 18 19 20 31 32 33 34 36 40 41 42 43 44 45 46 47 56 57 62 63 64
+GUION                : 13 17 18 19 20 31 32 33 34 36 40 41 42 43 44 45 46 47 56 57 62 63
 ID                   : 58
 IDENTIFICADOR        : 25 26 49 50 51 58
-IGUAL                : 13 21 24 25 26 35 48 49 50 51 52 58 65
+IGUAL                : 13 21 24 25 26 35 48 49 50 51 52 58
 MKDISK               : 14
 MKFS                 : 59
 MOUNT                : 53
@@ -124,7 +120,6 @@ parametroadd         : 47
 parametrodelete      : 46
 parametrofdisk       : 38 39
 parametrofit         : 20 45
-parametrofs          : 64
 parametroid          : 33 62
 parametromkdisk      : 15 16
 parametromkfs        : 60 61
@@ -494,7 +489,6 @@ state 20
     (61) listaparametros_mkfs -> . parametromkfs
     (62) parametromkfs -> . GUION parametroid
     (63) parametromkfs -> . GUION parametrotype
-    (64) parametromkfs -> . GUION parametrofs
 
     GUION           shift and go to state 38
 
@@ -796,7 +790,6 @@ state 36
     (60) listaparametros_mkfs -> listaparametros_mkfs . parametromkfs
     (62) parametromkfs -> . GUION parametroid
     (63) parametromkfs -> . GUION parametrotype
-    (64) parametromkfs -> . GUION parametrofs
 
     PAUSE           reduce using rule 59 (comandomkfs -> MKFS listaparametros_mkfs .)
     EXECUTE         reduce using rule 59 (comandomkfs -> MKFS listaparametros_mkfs .)
@@ -833,24 +826,20 @@ state 38
 
     (62) parametromkfs -> GUION . parametroid
     (63) parametromkfs -> GUION . parametrotype
-    (64) parametromkfs -> GUION . parametrofs
     (58) parametroid -> . ID IGUAL IDENTIFICADOR
     (50) parametrotype -> . TYPE IGUAL IDENTIFICADOR
-    (65) parametrofs -> . FS IGUAL FORMATEAR
 
     ID              shift and go to state 55
     TYPE            shift and go to state 67
-    FS              shift and go to state 77
 
     parametroid                    shift and go to state 74
     parametrotype                  shift and go to state 75
-    parametrofs                    shift and go to state 76
 
 state 39
 
     (13) comandoexecute -> EXECUTE GUION PATH . IGUAL VALORDEPATH NOMBREARCHIVO
 
-    IGUAL           shift and go to state 78
+    IGUAL           shift and go to state 76
 
 
 state 40
@@ -942,28 +931,28 @@ state 45
 
     (21) parametropath -> PATH . IGUAL valorespath
 
-    IGUAL           shift and go to state 79
+    IGUAL           shift and go to state 77
 
 
 state 46
 
     (24) parametrosize -> SIZE . IGUAL NUMEROS
 
-    IGUAL           shift and go to state 80
+    IGUAL           shift and go to state 78
 
 
 state 47
 
     (25) parametrounit -> UNIT . IGUAL IDENTIFICADOR
 
-    IGUAL           shift and go to state 81
+    IGUAL           shift and go to state 79
 
 
 state 48
 
     (26) parametrofit -> FIT . IGUAL IDENTIFICADOR
 
-    IGUAL           shift and go to state 82
+    IGUAL           shift and go to state 80
 
 
 state 49
@@ -1056,21 +1045,21 @@ state 54
     (48) parametroname -> NAME . IGUAL STRING
     (49) parametroname -> NAME . IGUAL IDENTIFICADOR
 
-    IGUAL           shift and go to state 83
+    IGUAL           shift and go to state 81
 
 
 state 55
 
     (58) parametroid -> ID . IGUAL IDENTIFICADOR
 
-    IGUAL           shift and go to state 84
+    IGUAL           shift and go to state 82
 
 
 state 56
 
     (35) parametroruta -> RUTA . IGUAL VALORDEPATH NOMBREARCHIVO
 
-    IGUAL           shift and go to state 85
+    IGUAL           shift and go to state 83
 
 
 state 57
@@ -1246,21 +1235,21 @@ state 67
 
     (50) parametrotype -> TYPE . IGUAL IDENTIFICADOR
 
-    IGUAL           shift and go to state 86
+    IGUAL           shift and go to state 84
 
 
 state 68
 
     (51) parametrodelete -> DELETE . IGUAL IDENTIFICADOR
 
-    IGUAL           shift and go to state 87
+    IGUAL           shift and go to state 85
 
 
 state 69
 
     (52) parametroadd -> ADD . IGUAL NUMEROS
 
-    IGUAL           shift and go to state 88
+    IGUAL           shift and go to state 86
 
 
 state 70
@@ -1367,126 +1356,95 @@ state 75
 
 state 76
 
-    (64) parametromkfs -> GUION parametrofs .
+    (13) comandoexecute -> EXECUTE GUION PATH IGUAL . VALORDEPATH NOMBREARCHIVO
 
-    GUION           reduce using rule 64 (parametromkfs -> GUION parametrofs .)
-    PAUSE           reduce using rule 64 (parametromkfs -> GUION parametrofs .)
-    EXECUTE         reduce using rule 64 (parametromkfs -> GUION parametrofs .)
-    MKDISK          reduce using rule 64 (parametromkfs -> GUION parametrofs .)
-    COMENTARIOS     reduce using rule 64 (parametromkfs -> GUION parametrofs .)
-    REP             reduce using rule 64 (parametromkfs -> GUION parametrofs .)
-    RMDISK          reduce using rule 64 (parametromkfs -> GUION parametrofs .)
-    FDISK           reduce using rule 64 (parametromkfs -> GUION parametrofs .)
-    MOUNT           reduce using rule 64 (parametromkfs -> GUION parametrofs .)
-    MKFS            reduce using rule 64 (parametromkfs -> GUION parametrofs .)
-    $end            reduce using rule 64 (parametromkfs -> GUION parametrofs .)
+    VALORDEPATH     shift and go to state 87
 
 
 state 77
-
-    (65) parametrofs -> FS . IGUAL FORMATEAR
-
-    IGUAL           shift and go to state 89
-
-
-state 78
-
-    (13) comandoexecute -> EXECUTE GUION PATH IGUAL . VALORDEPATH NOMBREARCHIVO
-
-    VALORDEPATH     shift and go to state 90
-
-
-state 79
 
     (21) parametropath -> PATH IGUAL . valorespath
     (22) valorespath -> . VALORDEPATH NOMBREARCHIVO
     (23) valorespath -> . COMILLAS VALORDEPATH NOMBREARCHIVO COMILLAS
 
-    VALORDEPATH     shift and go to state 92
-    COMILLAS        shift and go to state 93
+    VALORDEPATH     shift and go to state 89
+    COMILLAS        shift and go to state 90
 
-    valorespath                    shift and go to state 91
+    valorespath                    shift and go to state 88
 
-state 80
+state 78
 
     (24) parametrosize -> SIZE IGUAL . NUMEROS
 
-    NUMEROS         shift and go to state 94
+    NUMEROS         shift and go to state 91
+
+
+state 79
+
+    (25) parametrounit -> UNIT IGUAL . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 92
+
+
+state 80
+
+    (26) parametrofit -> FIT IGUAL . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 93
 
 
 state 81
 
-    (25) parametrounit -> UNIT IGUAL . IDENTIFICADOR
+    (48) parametroname -> NAME IGUAL . STRING
+    (49) parametroname -> NAME IGUAL . IDENTIFICADOR
 
+    STRING          shift and go to state 94
     IDENTIFICADOR   shift and go to state 95
 
 
 state 82
 
-    (26) parametrofit -> FIT IGUAL . IDENTIFICADOR
+    (58) parametroid -> ID IGUAL . IDENTIFICADOR
 
     IDENTIFICADOR   shift and go to state 96
 
 
 state 83
 
-    (48) parametroname -> NAME IGUAL . STRING
-    (49) parametroname -> NAME IGUAL . IDENTIFICADOR
+    (35) parametroruta -> RUTA IGUAL . VALORDEPATH NOMBREARCHIVO
 
-    STRING          shift and go to state 97
-    IDENTIFICADOR   shift and go to state 98
+    VALORDEPATH     shift and go to state 97
 
 
 state 84
 
-    (58) parametroid -> ID IGUAL . IDENTIFICADOR
+    (50) parametrotype -> TYPE IGUAL . IDENTIFICADOR
 
-    IDENTIFICADOR   shift and go to state 99
+    IDENTIFICADOR   shift and go to state 98
 
 
 state 85
 
-    (35) parametroruta -> RUTA IGUAL . VALORDEPATH NOMBREARCHIVO
+    (51) parametrodelete -> DELETE IGUAL . IDENTIFICADOR
 
-    VALORDEPATH     shift and go to state 100
+    IDENTIFICADOR   shift and go to state 99
 
 
 state 86
 
-    (50) parametrotype -> TYPE IGUAL . IDENTIFICADOR
+    (52) parametroadd -> ADD IGUAL . NUMEROS
 
-    IDENTIFICADOR   shift and go to state 101
+    NUMEROS         shift and go to state 100
 
 
 state 87
 
-    (51) parametrodelete -> DELETE IGUAL . IDENTIFICADOR
+    (13) comandoexecute -> EXECUTE GUION PATH IGUAL VALORDEPATH . NOMBREARCHIVO
 
-    IDENTIFICADOR   shift and go to state 102
+    NOMBREARCHIVO   shift and go to state 101
 
 
 state 88
-
-    (52) parametroadd -> ADD IGUAL . NUMEROS
-
-    NUMEROS         shift and go to state 103
-
-
-state 89
-
-    (65) parametrofs -> FS IGUAL . FORMATEAR
-
-    FORMATEAR       shift and go to state 104
-
-
-state 90
-
-    (13) comandoexecute -> EXECUTE GUION PATH IGUAL VALORDEPATH . NOMBREARCHIVO
-
-    NOMBREARCHIVO   shift and go to state 105
-
-
-state 91
 
     (21) parametropath -> PATH IGUAL valorespath .
 
@@ -1503,21 +1461,21 @@ state 91
     $end            reduce using rule 21 (parametropath -> PATH IGUAL valorespath .)
 
 
-state 92
+state 89
 
     (22) valorespath -> VALORDEPATH . NOMBREARCHIVO
 
-    NOMBREARCHIVO   shift and go to state 106
+    NOMBREARCHIVO   shift and go to state 102
 
 
-state 93
+state 90
 
     (23) valorespath -> COMILLAS . VALORDEPATH NOMBREARCHIVO COMILLAS
 
-    VALORDEPATH     shift and go to state 107
+    VALORDEPATH     shift and go to state 103
 
 
-state 94
+state 91
 
     (24) parametrosize -> SIZE IGUAL NUMEROS .
 
@@ -1534,7 +1492,7 @@ state 94
     $end            reduce using rule 24 (parametrosize -> SIZE IGUAL NUMEROS .)
 
 
-state 95
+state 92
 
     (25) parametrounit -> UNIT IGUAL IDENTIFICADOR .
 
@@ -1551,7 +1509,7 @@ state 95
     $end            reduce using rule 25 (parametrounit -> UNIT IGUAL IDENTIFICADOR .)
 
 
-state 96
+state 93
 
     (26) parametrofit -> FIT IGUAL IDENTIFICADOR .
 
@@ -1568,7 +1526,7 @@ state 96
     $end            reduce using rule 26 (parametrofit -> FIT IGUAL IDENTIFICADOR .)
 
 
-state 97
+state 94
 
     (48) parametroname -> NAME IGUAL STRING .
 
@@ -1585,7 +1543,7 @@ state 97
     $end            reduce using rule 48 (parametroname -> NAME IGUAL STRING .)
 
 
-state 98
+state 95
 
     (49) parametroname -> NAME IGUAL IDENTIFICADOR .
 
@@ -1602,7 +1560,7 @@ state 98
     $end            reduce using rule 49 (parametroname -> NAME IGUAL IDENTIFICADOR .)
 
 
-state 99
+state 96
 
     (58) parametroid -> ID IGUAL IDENTIFICADOR .
 
@@ -1619,14 +1577,14 @@ state 99
     $end            reduce using rule 58 (parametroid -> ID IGUAL IDENTIFICADOR .)
 
 
-state 100
+state 97
 
     (35) parametroruta -> RUTA IGUAL VALORDEPATH . NOMBREARCHIVO
 
-    NOMBREARCHIVO   shift and go to state 108
+    NOMBREARCHIVO   shift and go to state 104
 
 
-state 101
+state 98
 
     (50) parametrotype -> TYPE IGUAL IDENTIFICADOR .
 
@@ -1643,7 +1601,7 @@ state 101
     $end            reduce using rule 50 (parametrotype -> TYPE IGUAL IDENTIFICADOR .)
 
 
-state 102
+state 99
 
     (51) parametrodelete -> DELETE IGUAL IDENTIFICADOR .
 
@@ -1660,7 +1618,7 @@ state 102
     $end            reduce using rule 51 (parametrodelete -> DELETE IGUAL IDENTIFICADOR .)
 
 
-state 103
+state 100
 
     (52) parametroadd -> ADD IGUAL NUMEROS .
 
@@ -1677,24 +1635,7 @@ state 103
     $end            reduce using rule 52 (parametroadd -> ADD IGUAL NUMEROS .)
 
 
-state 104
-
-    (65) parametrofs -> FS IGUAL FORMATEAR .
-
-    GUION           reduce using rule 65 (parametrofs -> FS IGUAL FORMATEAR .)
-    PAUSE           reduce using rule 65 (parametrofs -> FS IGUAL FORMATEAR .)
-    EXECUTE         reduce using rule 65 (parametrofs -> FS IGUAL FORMATEAR .)
-    MKDISK          reduce using rule 65 (parametrofs -> FS IGUAL FORMATEAR .)
-    COMENTARIOS     reduce using rule 65 (parametrofs -> FS IGUAL FORMATEAR .)
-    REP             reduce using rule 65 (parametrofs -> FS IGUAL FORMATEAR .)
-    RMDISK          reduce using rule 65 (parametrofs -> FS IGUAL FORMATEAR .)
-    FDISK           reduce using rule 65 (parametrofs -> FS IGUAL FORMATEAR .)
-    MOUNT           reduce using rule 65 (parametrofs -> FS IGUAL FORMATEAR .)
-    MKFS            reduce using rule 65 (parametrofs -> FS IGUAL FORMATEAR .)
-    $end            reduce using rule 65 (parametrofs -> FS IGUAL FORMATEAR .)
-
-
-state 105
+state 101
 
     (13) comandoexecute -> EXECUTE GUION PATH IGUAL VALORDEPATH NOMBREARCHIVO .
 
@@ -1710,7 +1651,7 @@ state 105
     $end            reduce using rule 13 (comandoexecute -> EXECUTE GUION PATH IGUAL VALORDEPATH NOMBREARCHIVO .)
 
 
-state 106
+state 102
 
     (22) valorespath -> VALORDEPATH NOMBREARCHIVO .
 
@@ -1727,14 +1668,14 @@ state 106
     $end            reduce using rule 22 (valorespath -> VALORDEPATH NOMBREARCHIVO .)
 
 
-state 107
+state 103
 
     (23) valorespath -> COMILLAS VALORDEPATH . NOMBREARCHIVO COMILLAS
 
-    NOMBREARCHIVO   shift and go to state 109
+    NOMBREARCHIVO   shift and go to state 105
 
 
-state 108
+state 104
 
     (35) parametroruta -> RUTA IGUAL VALORDEPATH NOMBREARCHIVO .
 
@@ -1751,14 +1692,14 @@ state 108
     $end            reduce using rule 35 (parametroruta -> RUTA IGUAL VALORDEPATH NOMBREARCHIVO .)
 
 
-state 109
+state 105
 
     (23) valorespath -> COMILLAS VALORDEPATH NOMBREARCHIVO . COMILLAS
 
-    COMILLAS        shift and go to state 110
+    COMILLAS        shift and go to state 106
 
 
-state 110
+state 106
 
     (23) valorespath -> COMILLAS VALORDEPATH NOMBREARCHIVO COMILLAS .
 

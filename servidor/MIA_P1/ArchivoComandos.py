@@ -23,7 +23,6 @@ palabrasReservadas = {"execute":"EXECUTE",
                       "mount" : "MOUNT",
                       "id" : "ID",
                       "mkfs" : "MKFS",
-                      "fs" : "FS",
                       "pause": "PAUSE",
                       "ruta" : "RUTA",
                       "rep": "REP"}
@@ -36,7 +35,6 @@ tokens = ["IDENTIFICADOR",
           "GUION",
           "IGUAL",
           "VALORDEPATH",
-          "FORMATEAR",
           "NOMBREARCHIVO"]+list(palabrasReservadas.values())
 
 
@@ -78,10 +76,6 @@ def t_IDENTIFICADOR(t):
 #ahora numeros 
 def t_NUMEROS(t):
     r"-?\d+"
-    return t
-
-def t_FORMATEAR(t):
-    r"(2fs|3fs)"
     return t
 
 t_ignore = " \t\r"
@@ -308,13 +302,8 @@ def p_listaparametros_mkfs(t):
 
 def p_parametromkfs(t):
     '''parametromkfs : GUION parametroid
-                     | GUION parametrotype
-                     | GUION parametrofs'''
+                     | GUION parametrotype'''
     t[0] = t[2]
-
-def p_parametrofs(t):
-    '''parametrofs : FS IGUAL FORMATEAR'''
-    t[0] = {"valorfs" : t[3]}
 
 def iniciarAnalisis(comando):
     global input

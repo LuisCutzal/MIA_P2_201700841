@@ -62,21 +62,21 @@ class FDISK(ctypes.Structure):
             escribirArchivoExistente(self.path, 0, self.temporalMBR.doSerialize())
 
         if self.delete != '\0':
-            self.eliminarParticion(self.name)
-            
-            if self.buscarnombre(listaParticiones,self.name):
+            #self.eliminarParticion(self.name)
+            print("Error el comando delete no existe")
+            """if self.buscarnombre(listaParticiones,self.name):
                 self.eliminarParticion(self.name)
             else:
                 print("FDISK no se pudo ejecutar correctamente")
                 print("El nombre de la particion no exite o ya fue eliminado")
-                return
+                return"""
             
         if self.add > 0:
-            print("Agregando mas espacio")
-            self.modificarEspacioParticion(self.name, self.add)
+            print("Error, el comando add no existe")
+            #self.modificarEspacioParticion(self.name, self.add)
         if self.add <0:
-            print("Quitando espacio")
-            self.modificarEspacioParticion(self.name, self.add)
+            print("Error, el comando add no existe")
+            #self.modificarEspacioParticion(self.name, self.add)
     
     def agregarValores(self):
         for val in self.listaParametros:
