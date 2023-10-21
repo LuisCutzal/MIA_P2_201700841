@@ -1,7 +1,7 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, url_for
 from flask_cors import CORS  
 from MIA_P1.readData import readData
-
+import os
 app = Flask(__name__)
 CORS(app)
 
@@ -22,6 +22,19 @@ def execute():
 
     response = readData(entry_value)
     return jsonify({'salida': response})
+
+@app.route("/api/getImages", methods=['GET'])
+def get_images():
+    dir_imagen = 'static/images'  # Nombre de la carpeta de imágenes
+    array_Imagen = []
+    listaImagen=  os.listdir(dir_imagen)
+    for urlimagen in listaImagen:
+        direccionImagen = url_for('static', filename = 'images/'+urlimagen, _external = True)
+        array_Imagen.append({
+            "nombre": os.path.basename(urlimagen),
+            "direccion":direccionImagen
+        })
+    return jsonify(array_Imagen)
 
 if __name__ == '__main__':
     app.run()
