@@ -1,5 +1,5 @@
 import os
-from load import *
+from MIA_P1.load import *
 class RMDISK():
     def __init__(self):
         pass

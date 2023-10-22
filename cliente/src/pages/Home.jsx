@@ -18,7 +18,11 @@ function Home() {
             .then(Response => Response.json())
             .then(data =>{
                 //actualizamos el estado de la segunda consola con la respuesta del servidor
-                setContenidoConsola(data.salida);
+                var valorMensaje = ""
+                for(var text in data.salida){
+                    valorMensaje += data.salida[text]+'\n'
+                }
+                setContenidoConsola(valorMensaje);
             })
             .catch(error =>{
                 console.error("Error al ejecutar la solicitud POST:", error);

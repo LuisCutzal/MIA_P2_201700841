@@ -1,9 +1,9 @@
 import ctypes
 import struct
-from utilities import *
-from load import *
-from MBR import *
-from EBR import *
+from MIA_P1.utilities import *
+from MIA_P1.load import *
+from MIA_P1.MBR import *
+from MIA_P1.EBR import *
 
 class FDISK(ctypes.Structure):
     def __init__(self,listaParametros):

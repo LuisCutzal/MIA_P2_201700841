@@ -1,7 +1,7 @@
 import ctypes
 import struct
-from utilities import *
-from particiones import *
+from MIA_P1.utilities import *
+from MIA_P1.particiones import *
 
 class MBR(ctypes.Structure):
     def __init__(self, mbr_tamano, mbr_fecha_creacion, mbr_dsk_signature, dsk_fit):

@@ -1,8 +1,8 @@
 import ctypes
 import struct
-from utilities import *
-from load import *
-from MBR import *
+from MIA_P1.utilities import *
+from MIA_P1.load import *
+from MIA_P1.MBR import *
 
 
 const = '3I c' #esta constante es para el mbr
@@ -15,8 +15,9 @@ class MKDISK(ctypes.Structure):
         #('unit', ctypes.c_char * 1)
     ]
         
-    def __init__(self,listaParametros):
+    def __init__(self,listaParametros,salidaConsolaWeb):
         self.listaParametros = listaParametros
+        self.salidaConsolaWeb = salidaConsolaWeb
         self.size = 0
         self.path = '' #no se guarda
         self.fit = 'FF'
@@ -35,6 +36,7 @@ class MKDISK(ctypes.Structure):
         #print(self.size, self.path, self.fit, self.unit)
         if self.path == "":
             print("error, MKDISK path obligatorio")
+            self.salidaConsolaWeb.append("error, MKDISK path obligatorio")
             return
         if self.size <= 0:
             print("error, MKDISK size debe ser mayor a 0")
@@ -45,7 +47,12 @@ class MKDISK(ctypes.Structure):
         if self.unit != "K" and self.unit != "M":
             print("error, MKDISK unit no se aceptan los valores")
             return
-        Fcreate_file(self.path)
+        
+        valorCreate = Fcreate_file(self.path)
+        if not valorCreate:
+            self.salidaConsolaWeb.append("Archivo creado exitosamente")
+        else:
+            self.salidaConsolaWeb.append("Error al crear archivo")
         Crrfile = open(self.path,"rb+")
         desplazamiento = 0
         self.calcularValoresSize()

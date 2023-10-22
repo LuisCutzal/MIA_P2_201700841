@@ -1,7 +1,7 @@
 import ctypes
 import struct
-from utilities import *
-from load import *
+from MIA_P1.utilities import *
+from MIA_P1.load import *
 
 class MKFS(ctypes.Structure):
     def __init__(self, listaParametros):

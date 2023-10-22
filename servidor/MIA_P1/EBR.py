@@ -1,7 +1,7 @@
 import ctypes
 import struct
-from utilities import *
-from load import *
+from MIA_P1.utilities import *
+from MIA_P1.load import *
 class EBR(ctypes.Structure): #es un EBR porque tendre muchos objetos ebr
     
     def __init__(self):

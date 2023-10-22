@@ -1,13 +1,13 @@
 import ply.yacc as sintactico
 import ply.lex as lexico
-from ejecutarexecute import comandoExecute
-from mkdisk import *
-from rep import *
-from rmdisk import *
-from fdisk import *
-from mount import *
-from mkfs import *
-from utilities import *
+from MIA_P1.ejecutarexecute import comandoExecute
+from MIA_P1.mkdisk import *
+from MIA_P1.rep import *
+from MIA_P1.rmdisk import *
+from MIA_P1.fdisk import *
+from MIA_P1.mount import *
+from MIA_P1.mkfs import *
+from MIA_P1.utilities import *
 palabrasReservadas = {"execute":"EXECUTE",
                       "mkdisk": "MKDISK",
                       "path": "PATH",
@@ -85,7 +85,7 @@ def t_nuevalinea(t):
     t.lexer.lineno += t.value.count("\n")
     
 def t_error(t):
-    print(f'Error Lexico:'+t.value[0]+' en la linea: '+str(t.lineno) +' en la columna: '+str(find_column(input, t)))
+    print(f'Error Lexico:'+t.value[0]+' en la linea: '+str(t.lineno) +' en la columna: '+str(find_column(input, t))) # type: ignore
     t.lexer.skip(1)
 
 def find_column(input, token):
@@ -135,7 +135,7 @@ def p_comandoexecute(t):
     
 def p_comandomkdisk(t):
     '''comandomkdisk : MKDISK listaparametros_mkdisk'''
-    MKDISK(t[2]).ejecutar()
+    MKDISK(t[2],salidaConsolaWeb).ejecutar()
     t[0]= ''
     
 def p_listaparametros_mkdisk(t):
@@ -306,16 +306,17 @@ def p_parametromkfs(t):
     t[0] = t[2]
 
 def iniciarAnalisis(comando):
+    global salidaConsolaWeb
     global input
     global listaMount
     input = comando
     listaMount = []
+    salidaConsolaWeb = []
     lex = lexico.lex()
     parser = sintactico.yacc()
     salIDENTIFICADORa = parser.parse(comando)
     if salIDENTIFICADORa == None:
-        return ""
-    elif salIDENTIFICADORa == []:
-        return ""
-    else: return salIDENTIFICADORa[0]
+        return []
+
+    return salidaConsolaWeb
 

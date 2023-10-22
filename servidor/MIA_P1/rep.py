@@ -1,6 +1,6 @@
-from MBR import *
-from EBR import *
-from load import *
+from MIA_P1.MBR import *
+from MIA_P1.EBR import *
+from MIA_P1.load import *
 import struct
 import graphviz
 class REP():
