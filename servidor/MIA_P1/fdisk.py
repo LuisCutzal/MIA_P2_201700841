@@ -6,8 +6,9 @@ from MIA_P1.MBR import *
 from MIA_P1.EBR import *
 
 class FDISK(ctypes.Structure):
-    def __init__(self,listaParametros):
+    def __init__(self,listaParametros,salidaConsolaWeb):
         self.listaParametros = listaParametros
+        self.salidaConsolaWeb = salidaConsolaWeb
         self.size = 0 #obligatorio
         self.path = '\0' #obligatorio
         self.name = '\0' #obligatorio
@@ -21,49 +22,55 @@ class FDISK(ctypes.Structure):
     
     def ejecutarFDISK(self):
         if not self.agregarValores():
-            print("FDISK no se pudo ejecutar correctamente")
+            #print("FDISK no se pudo ejecutar correctamente")
+            self.salidaConsolaWeb.append("FDISK no se pudo ejecutar correctamente")
             return
         self.leerMBR()
         if self.temporalMBR == "":
-            print("Error, no se encuentra el MBR del archivo")
+            #print("Error, no se encuentra el MBR del archivo")
+            self.salidaConsolaWeb.append("Error, no se encuentra el MBR del archivo")
             return
         listaParticiones = [self.temporalMBR.particion1,self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4] # type: ignore
         if self.add == 0 and self.delete == '\0':
             if self.size <=0:
-                print(f"El valor de size no existe o es menor o igual a cero")
+                #print(f"El valor de size no existe o es menor o igual a cero")
+                self.salidaConsolaWeb.append(f"El valor de size no existe o es menor o igual a cero")
                 return False
             #aca comienza todo lo que debe de hacer para agregar particiones sin usar add o delete en el comando
             if self.existeNombre(listaParticiones):
-                print("FDISK no se pudo ejecutar correctamente")
+                #print("FDISK no se pudo ejecutar correctamente")
+                self.salidaConsolaWeb.append("FDISK no se pudo ejecutar correctamente")
                 return
             if self.type == "E":
                 if self.comprobarExtendida(listaParticiones):
-                    print("FDISK no se pudo ejecutar correctamente")
-                    print("Error, Ya existe una extendida en el disco")
+                    #print("FDISK no se pudo ejecutar correctamente")
+                    #print("Error, Ya existe una extendida en el disco")
+                    self.salidaConsolaWeb.append("FDISK no se pudo ejecutar correctamente")
+                    self.salidaConsolaWeb.append("Error, Ya existe una extendida en el disco")
                     return
             if self.type == "L":
                 if not self.comprobarExtendida(listaParticiones):
-                    print("FDISK no se pudo ejecutar correctamente")
-                    print("Error, no se puede agregar particion logica sin una extendida")
+                    self.salidaConsolaWeb.append("FDISK no se pudo ejecutar correctamente")
+                    self.salidaConsolaWeb.append("Error, no se puede agregar particion logica sin una extendida")
                     return
                 else: 
                     self.escribirEBR()
                     return
             if not self.comprobarEspacio(listaParticiones):
-                print("FDISK no se pudo ejecutar correctamente")
+                self.salidaConsolaWeb.append("FDISK no se pudo ejecutar correctamente")
                 return
             if not self.comprobar4Particiones(listaParticiones):
-                print("Error FDISK, existen ya 4 particiones")
+                self.salidaConsolaWeb.append("Error FDISK, existen ya 4 particiones")
                 return
             self.particionLibre(listaParticiones)
-            self.temporalMBR.mbr_fecha_creacion = convertirTiempoEntero(self.temporalMBR.mbr_fecha_creacion)
+            self.temporalMBR.mbr_fecha_creacion = convertirTiempoEntero(self.temporalMBR.mbr_fecha_creacion)# type: ignore
             #self.temporalMBR.dsk_fit = convertirstringaBin(self.temporalMBR.dsk_fit)
             #print(self.temporalMBR.doSerialize())
-            escribirArchivoExistente(self.path, 0, self.temporalMBR.doSerialize())
+            escribirArchivoExistente(self.path, 0, self.temporalMBR.doSerialize())# type: ignore
 
         if self.delete != '\0':
             #self.eliminarParticion(self.name)
-            print("Error el comando delete no existe")
+            self.salidaConsolaWeb.append("Error el comando delete no existe")
             """if self.buscarnombre(listaParticiones,self.name):
                 self.eliminarParticion(self.name)
             else:
@@ -72,10 +79,10 @@ class FDISK(ctypes.Structure):
                 return"""
             
         if self.add > 0:
-            print("Error, el comando add no existe")
+            self.salidaConsolaWeb.append("Error, el comando add no existe")
             #self.modificarEspacioParticion(self.name, self.add)
         if self.add <0:
-            print("Error, el comando add no existe")
+            self.salidaConsolaWeb.append("Error, el comando add no existe")
             #self.modificarEspacioParticion(self.name, self.add)
     
     def agregarValores(self):
@@ -99,7 +106,7 @@ class FDISK(ctypes.Structure):
         #print(self.listaParametros)
         
         if not archivoExistente(self.path):
-            print(f"No existe el archivo en la ruta {self.path}")
+            self.salidaConsolaWeb.append(f"No existe el archivo en la ruta {self.path}")
             return False
         
         self.calcularValoresSize()
@@ -110,23 +117,23 @@ class FDISK(ctypes.Structure):
     
     def calcularValoresSize(self):
         if self.unit.lower() == "b": #byes
-            print("particion en bytes")
+            self.salidaConsolaWeb.append("particion en bytes")
         elif self.unit.lower() == "k": #kilobytes
             self.size = self.size * 1024
-            print("particion en kilobytes")
+            self.salidaConsolaWeb.append("particion en kilobytes")
         elif self.unit.lower() == "m": #megabytes
             self.size = self.size * 1024 * 1024
-            print("particion en megabytes")
-        else: print(f"Error, el valor {self.unit} de unit no es valido")
+            self.salidaConsolaWeb.append("particion en megabytes")
+        else: self.salidaConsolaWeb.append(f"Error, el valor {self.unit} de unit no es valido")
     
     def tipoDeParticion(self):
         if self.type.lower() == "p":
-            print("particion primaria")
+            self.salidaConsolaWeb.append("particion primaria")
         elif self.type.lower() == "e":
-            print("particion extendida")
+            self.salidaConsolaWeb.append("particion extendida")
         elif self.type.lower() == "l":
-            print("particion logica")
-        else: print(f"Error, el valor {self.type} de type no es valido")
+            self.salidaConsolaWeb.append("particion logica")
+        else: self.salidaConsolaWeb.append(f"Error, el valor {self.type} de type no es valido")
     
     
     def leerMBR(self):
@@ -147,7 +154,7 @@ class FDISK(ctypes.Structure):
     def existeNombre(self, listaparticiones): #aca verificamos si el nombre de la particion existe
         for particion in listaparticiones:
             if particion.part_name == self.name:
-                print("El nombre de la particion ya existe")
+                self.salidaConsolaWeb.append("El nombre de la particion ya existe")
                 return True
         return False
     
@@ -161,7 +168,7 @@ class FDISK(ctypes.Structure):
         particion.part_status = "1"
         particion.part_type = self.type
         particion.part_fit = self.fit
-        particion.part_start = self.comprobarStart([self.temporalMBR.particion1,self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4])
+        particion.part_start = self.comprobarStart([self.temporalMBR.particion1,self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4])# type: ignore
         particion.part_s = self.size
         particion.part_name = self.name
         
@@ -171,8 +178,8 @@ class FDISK(ctypes.Structure):
         for particion in listaparticiones:
             if particion.part_status != "\x00":
                 cantidadEspacio += particion.part_s
-        if self.temporalMBR.mbr_tamano < cantidadEspacio + self.size:
-            print("No existe espacio suficiente para la particion que desea crear")
+        if self.temporalMBR.mbr_tamano < cantidadEspacio + self.size: # type: ignore
+            self.salidaConsolaWeb.append("No existe espacio suficiente para la particion que desea crear")
             return False
         return True
     
@@ -189,7 +196,7 @@ class FDISK(ctypes.Structure):
         return False
     
     def comprobarStart(self, listaparticiones):
-        partStart = struct.calcsize(self.temporalMBR.constMBR) + struct.calcsize(self.temporalMBR.particion1.constanteParticion)*4
+        partStart = struct.calcsize(self.temporalMBR.constMBR) + struct.calcsize(self.temporalMBR.particion1.constanteParticion)*4 # type: ignore
         for particion in listaparticiones:
             if particion.part_status != "\x00":
                 partStart += particion.part_s
@@ -203,34 +210,34 @@ class FDISK(ctypes.Structure):
     
     def escribirEBR(self):
         actualEBR = EBR()
-        listaparticiones = [self.temporalMBR.particion1,self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4]
+        listaparticiones = [self.temporalMBR.particion1,self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4] # type: ignore
         particionExtendida = self.retornarExtendida(listaparticiones)
         tam = struct.calcsize(actualEBR.constanteEBR)
-        datosEBR = Fread_displacement(self.path,particionExtendida.part_start,tam)
+        datosEBR = Fread_displacement(self.path,particionExtendida.part_start,tam) # type: ignore
         actualEBR.doDeserialize(datosEBR)
-        actualizarSize = particionExtendida.part_s
+        actualizarSize = particionExtendida.part_s # type: ignore
         #comienza la lista enlazada
         if actualizarSize < self.size:
-            print("Error, no se puede crear la particion Logica")
+            self.salidaConsolaWeb.append("Error, no se puede crear la particion Logica")
             return        
         if actualEBR.part_s == 0: #es el primer ebr
             actualEBR.part_status = "1"
             actualEBR.part_fit = self.fit
-            actualEBR.part_start = particionExtendida.part_start
+            actualEBR.part_start = particionExtendida.part_start # type: ignore
             actualEBR.part_s = self.size
             actualEBR.part_next = actualEBR.part_next
             actualEBR.part_name = self.name
-            escribirArchivoExistente(self.path, particionExtendida.part_start, actualEBR.doSerialize())
+            escribirArchivoExistente(self.path, particionExtendida.part_start, actualEBR.doSerialize()) # type: ignore
             #print(particionExtendida.part_start)
             return
         while actualEBR.part_next != -1:
             actualEBR.doDeserialize(Fread_displacement(self.path, actualEBR.part_next, tam))  #porque debemos de leer el siguiente
             actualizarSize -= actualEBR.part_s
             if actualEBR.part_name == self.name:
-                print("Ya existe la particion logica")
+                self.salidaConsolaWeb.append("Ya existe la particion logica")
                 return
             if actualizarSize < self.size:
-                print("No se puede crear particion ya que no existe espacio suficiente")
+                self.salidaConsolaWeb.append("No se puede crear particion ya que no existe espacio suficiente")
                 return
                 
         actualEBR.part_next = actualEBR.part_start + self.size
@@ -284,13 +291,13 @@ class FDISK(ctypes.Structure):
                 actualEBR = EBR()
                 actualEBR.part_next = siguiente
                 escribirArchivoExistente(self.path,temporalParticion.part_start, actualEBR.doSerialize())
-                print(f"Particion logica {nombre} eliminada con exito")
+                self.salidaConsolaWeb.append(f"Particion logica {nombre} eliminada con exito")
                 return
             #encontro la primera particion logica
             else:
                 actualEBR = EBR()
                 escribirArchivoExistente(self.path,temporalParticion.part_start,actualEBR.doSerialize())
-                print(f"Particion logica {nombre} eliminada con exito")
+                self.salidaConsolaWeb.append(f"Particion logica {nombre} eliminada con exito")
                 return
         while actualEBR.part_next != -1:
             datosEBR = Fread_displacement(self.path, actualEBR.part_next, tamanioEBR)
@@ -306,17 +313,17 @@ class FDISK(ctypes.Structure):
                 siguienteEBR.part_next = -1
                 siguienteEBR.part_name = "\0" * 16
                 escribirArchivoExistente(self.path, actualEBR.part_start, actualEBR.doSerialize())
-                print(f"Particion logica {nombre} eliminada con exito")
+                self.salidaConsolaWeb.append(f"Particion logica {nombre} eliminada con exito")
                 return
             actualEBR = siguienteEBR
-        print(f"No se encontró la partición lógica {nombre}.")
+        self.salidaConsolaWeb.append(f"No se encontró la partición lógica {nombre}.")
 
 
                 
                 
     def modificarEspacioParticion(self, nombre_particion, espacio):
         # Buscar la partición con el nombre dado en el MBR
-        listaParticiones = [self.temporalMBR.particion1, self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4]
+        listaParticiones = [self.temporalMBR.particion1, self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4] # type: ignore
         particion = None
         for p in listaParticiones:
             if p.part_name == nombre_particion:
@@ -324,24 +331,24 @@ class FDISK(ctypes.Structure):
                 break
         
         if particion is None:
-            print(f"No se encontró la partición {nombre_particion}.")
+            self.salidaConsolaWeb.append(f"No se encontró la partición {nombre_particion}.")
             return
         
         # Verificar si el espacio es negativo (quitar espacio) o positivo (agregar espacio)
         if espacio < 0:
             if abs(espacio) > particion.part_s:
-                print(f"No se puede quitar {abs(espacio)} espacio de la partición {nombre_particion}, espacio insuficiente.")
+                self.salidaConsolaWeb.append(f"No se puede quitar {abs(espacio)} espacio de la partición {nombre_particion}, espacio insuficiente.")
                 return
             particion.part_s -= abs(espacio)
-            print(f"Se quitó {abs(espacio)} espacio de la partición {nombre_particion}.")
+            self.salidaConsolaWeb.append(f"Se quitó {abs(espacio)} espacio de la partición {nombre_particion}.")
         elif espacio > 0:
             particion.part_s += espacio
-            print(f"Se agregó {espacio} espacio a la partición {nombre_particion}.")
+            self.salidaConsolaWeb.append(f"Se agregó {espacio} espacio a la partición {nombre_particion}.")
         else:
-            print("No se realiza ninguna operación, el espacio es cero.")
+            self.salidaConsolaWeb.append("No se realiza ninguna operación, el espacio es cero.")
 
         # Actualizar el MBR con los cambios en el tamaño de la partición
-        self.temporalMBR.mbr_fecha_creacion = convertirTiempoEntero(self.temporalMBR.mbr_fecha_creacion)
+        self.temporalMBR.mbr_fecha_creacion = convertirTiempoEntero(self.temporalMBR.mbr_fecha_creacion) # type: ignore
 
         # Actualizar el tamaño de la partición en el MBR
         for i in range(len(listaParticiones)):
@@ -350,5 +357,5 @@ class FDISK(ctypes.Structure):
                 break
 
         # Escribir el MBR actualizado en el archivo
-        mbr_data = bytearray(self.temporalMBR.doSerialize())
+        mbr_data = bytearray(self.temporalMBR.doSerialize()) # type: ignore
         escribirArchivoExistente(self.path, 0, mbr_data)

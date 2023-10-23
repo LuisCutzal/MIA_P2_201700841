@@ -221,7 +221,7 @@ def p_comandormdisk(t):
 
 def p_comandofdisk(t):
     '''comandofdisk : FDISK listaparametros_fdisk'''
-    FDISK(t[2]).ejecutarFDISK()
+    FDISK(t[2],salidaConsolaWeb).ejecutarFDISK()
     t[0]=""
 
 def p_listaparametros_fdisk(t):
