@@ -33,17 +33,19 @@ def Fcreate_file(fileName):
         # Crea el archivo
         fileOpen = open(fileName, "wb")
         fileOpen.close()
-        print("Archivo creado exitosamente")
+        #print("Archivo creado exitosamente")
         return False
     except Exception as e:
-        print(f"Error al crear archivo: {e}")
+        #print(f"Error al crear archivo: {e}")
         return True
 
-def Winit_size(file, size_mb):
+def Winit_size(file, size_mb,salidaConsolaWeb):
     buffer = b'\0' * size_mb
-    print(f"Tamaño del archivo: {len(buffer)} bytes")
+    #print(f"Tamaño del archivo: {len(buffer)} bytes")
+    salidaConsolaWeb.append(f"Tamaño del archivo: {len(buffer)} bytes")
     file.write(buffer)
-    print("Tamaño aplicado")
+    #print("Tamaño aplicado")
+    salidaConsolaWeb.append("Tamaño aplicado")
 
 
 def archivoExistente(file):

@@ -183,7 +183,7 @@ def p_parametrofit(t):
 
 def p_comentarios(t):
     '''comentarios : COMENTARIOS'''
-    print("#"+t[1])
+    salidaConsolaWeb.append("#"+t[1])
     t[0] = ""
 
 def p_rep(t):

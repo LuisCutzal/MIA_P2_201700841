@@ -35,17 +35,20 @@ class MKDISK(ctypes.Structure):
                 self.path = val.get("rutaArchivo") + val.get("nombrearchivo")
         #print(self.size, self.path, self.fit, self.unit)
         if self.path == "":
-            print("error, MKDISK path obligatorio")
+            #print("error, MKDISK path obligatorio")
             self.salidaConsolaWeb.append("error, MKDISK path obligatorio")
             return
         if self.size <= 0:
-            print("error, MKDISK size debe ser mayor a 0")
+            #print("error, MKDISK size debe ser mayor a 0")
+            self.salidaConsolaWeb.append("error, MKDISK size debe ser mayor a 0")
             return
         if self.fit != "BF" and self.fit != "FF" and self.fit != "WF":
-            print("error, MKDISK fit no se aceptan los valores")
+            #print("error, MKDISK fit no se aceptan los valores")
+            self.salidaConsolaWeb.append("error, MKDISK fit no se aceptan los valores")
             return
         if self.unit != "K" and self.unit != "M":
-            print("error, MKDISK unit no se aceptan los valores")
+            #print("error, MKDISK unit no se aceptan los valores")
+            self.salidaConsolaWeb.append("error, MKDISK unit no se aceptan los valores")
             return
         
         valorCreate = Fcreate_file(self.path)
@@ -58,7 +61,7 @@ class MKDISK(ctypes.Structure):
         self.calcularValoresSize()
         nuevoMBR = MBR(self.size,tiempo(),randomVal(1,100),convertirstringaBin(convertirValoresFit(self.fit)))
         datos = nuevoMBR.doSerialize()
-        Winit_size(Crrfile,self.size)
+        Winit_size(Crrfile,self.size,self.salidaConsolaWeb )
         Fwrite_displacement(Crrfile,desplazamiento,datos) #archivo, desplazamiento y valores en binario
         Crrfile.close()
         
@@ -73,9 +76,9 @@ class MKDISK(ctypes.Structure):
 
     def display_info(self):
         print(f"size: {self.size}")
-        print(f"path: {self.path.decode()}")
-        print(f"fit: {self.fit.decode()}")
-        print(f"unit: {self.unit.decode()}")
+        print(f"path: {self.path.decode()}") # type: ignore
+        print(f"fit: {self.fit.decode()}") # type: ignore
+        print(f"unit: {self.unit.decode()}") # type: ignore
     
 
     def doSerialize(self): #esto es lo que escribire en el archivo binario

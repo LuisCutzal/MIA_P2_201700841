@@ -27,7 +27,7 @@ class FDISK(ctypes.Structure):
         if self.temporalMBR == "":
             print("Error, no se encuentra el MBR del archivo")
             return
-        listaParticiones = [self.temporalMBR.particion1,self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4]
+        listaParticiones = [self.temporalMBR.particion1,self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4] # type: ignore
         if self.add == 0 and self.delete == '\0':
             if self.size <=0:
                 print(f"El valor de size no existe o es menor o igual a cero")
