@@ -85,7 +85,7 @@ def t_nuevalinea(t):
     t.lexer.lineno += t.value.count("\n")
     
 def t_error(t):
-    print(f'Error Lexico:'+t.value[0]+' en la linea: '+str(t.lineno) +' en la columna: '+str(find_column(input, t))) # type: ignore
+    salidaConsolaWeb.append(f'Error Lexico:'+t.value[0]+' en la linea: '+str(t.lineno) +' en la columna: '+str(find_column(input, t))) # type: ignore
     t.lexer.skip(1)
 
 def find_column(input, token):
@@ -264,7 +264,7 @@ def p_parametroadd(t):
     
 def p_comandomount(t):
     '''comandomount : MOUNT listaparametros_mount'''
-    MOUNT(t[2]).ejecutarMOUNT(listaMount)
+    MOUNT(t[2],salidaConsolaWeb).ejecutarMOUNT(listaMount)
     t[0]=""
 
 def p_listaparametros_mount(t):

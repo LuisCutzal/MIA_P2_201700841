@@ -5,8 +5,9 @@ from MIA_P1.load import *
 from MIA_P1.MBR import *
 from MIA_P1.EBR import *
 class MOUNT(ctypes.Structure):
-    def __init__(self, listaParametros):
+    def __init__(self, listaParametros,salidaConsolaWeb):
         self.listaParametros = listaParametros
+        self.salidaConsolaWeb = salidaConsolaWeb
         self.path = '\0' #obligatorio
         self.name = '\0' #obligatorio
         self.nombrearchivo = ""
@@ -16,16 +17,16 @@ class MOUNT(ctypes.Structure):
         
     def ejecutarMOUNT(self, listaMount):
         if not self.validarMount():
-            print("Error, no se pudo ejecutar el comando mount")
+            self.salidaConsolaWeb.append("Error, no se pudo ejecutar el comando mount")
             return
         if self.contieneValores(listaMount):
             return      
         self.leerMBR()
         if self.temporalMBR == "":
-            print("Error, no se encuentra el MBR del archivo")
+            self.salidaConsolaWeb.append("Error, no se encuentra el MBR del archivo")
             return
         if not self.buscarParticion(listaMount):
-            print(f"No se encontro la particion {self.name}")
+            self.salidaConsolaWeb.append(f"No se encontro la particion {self.name}")
             return
         
     def contieneValores(self, listaMount):
@@ -41,13 +42,13 @@ class MOUNT(ctypes.Structure):
             elif val.get("valorname") != None:
                 self.name = val.get("valorname")
         if not archivoExistente(self.path):
-            print(f"No existe el archivo en la ruta {self.path}")
+            self.salidaConsolaWeb.append(f"No existe el archivo en la ruta {self.path}")
             return
         return True
     
     def leerMBR(self):
         temporalMBR = MBR(0,0,0,0)
-        datos = Fread_displacement(self.path,0,struct.calcsize(temporalMBR.constMBR) + struct.calcsize(temporalMBR.particion1.constanteParticion)*4)
+        datos = Fread_displacement(self.path,0,struct.calcsize(temporalMBR.constMBR) + struct.calcsize(temporalMBR.particion1.constanteParticion)*4,self.salidaConsolaWeb) 
         temporalMBR.doDeserialize(datos) #ya tenemos los datos del mbr
         self.temporalMBR = temporalMBR
     
@@ -61,7 +62,7 @@ class MOUNT(ctypes.Structure):
         actualEBR = EBR()
         particionExtendida = self.retornarExtendida(listaparticiones)
         tam = struct.calcsize(actualEBR.constanteEBR)
-        datosEBR = Fread_displacement(self.path,particionExtendida.part_start,tam)
+        datosEBR = Fread_displacement(self.path,particionExtendida.part_start,tam, self.salidaConsolaWeb) #type:ignore
         actualEBR.doDeserialize(datosEBR)
         self.temportalEBR = actualEBR
         if actualEBR.part_name == self.name: #primera particion
@@ -72,11 +73,11 @@ class MOUNT(ctypes.Structure):
                 "particion": actualEBR
             }
             listaMount.append(datosMount)
-            print(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
+            self.salidaConsolaWeb.append(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
             return True
         contador +=1    
         while actualEBR.part_next != -1:
-            actualEBR.doDeserialize(Fread_displacement(self.path, actualEBR.part_next, tam))
+            actualEBR.doDeserialize(Fread_displacement(self.path, actualEBR.part_next, tam,self.salidaConsolaWeb))
             contador +=1
             if actualEBR.part_name == self.name:
                 datosMount = {
@@ -85,7 +86,7 @@ class MOUNT(ctypes.Structure):
                     "particion": actualEBR
                 }
                 listaMount.append(datosMount)
-                print(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
+                self.salidaConsolaWeb.append(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
                 return True
         return False
 
@@ -94,7 +95,7 @@ class MOUNT(ctypes.Structure):
         return "41"+str(numParticion)+nombre[0]
         
     def buscarParticion(self,listaMount):
-        listaParticiones = [self.temporalMBR.particion1,self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4]
+        listaParticiones = [self.temporalMBR.particion1,self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4] # type: ignore
         contadorparticion = 0
         for particion in listaParticiones: #para particiones primarias
             if particion.part_name == self.name:
@@ -104,7 +105,7 @@ class MOUNT(ctypes.Structure):
                     "particion": particion
                 }
                 listaMount.append(datosMount)
-                print(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
+                self.salidaConsolaWeb.append(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
                 return True
             contadorparticion +=1
         #comienza particiones logicas

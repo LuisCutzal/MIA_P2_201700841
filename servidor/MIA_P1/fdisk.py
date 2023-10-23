@@ -138,7 +138,7 @@ class FDISK(ctypes.Structure):
     
     def leerMBR(self):
         temporalMBR = MBR(0,0,0,0)
-        datos = Fread_displacement(self.path,0,struct.calcsize(temporalMBR.constMBR) + struct.calcsize(temporalMBR.particion1.constanteParticion)*4)
+        datos = Fread_displacement(self.path,0,struct.calcsize(temporalMBR.constMBR) + struct.calcsize(temporalMBR.particion1.constanteParticion)*4, self.salidaConsolaWeb)
         temporalMBR.doDeserialize(datos) #ya tenemos los datos del mbr
         self.temporalMBR = temporalMBR
     
@@ -231,7 +231,7 @@ class FDISK(ctypes.Structure):
             #print(particionExtendida.part_start)
             return
         while actualEBR.part_next != -1:
-            actualEBR.doDeserialize(Fread_displacement(self.path, actualEBR.part_next, tam))  #porque debemos de leer el siguiente
+            actualEBR.doDeserialize(Fread_displacement(self.path, actualEBR.part_next, tam,self.salidaConsolaWeb))  #porque debemos de leer el siguiente
             actualizarSize -= actualEBR.part_s
             if actualEBR.part_name == self.name:
                 self.salidaConsolaWeb.append("Ya existe la particion logica")
@@ -256,7 +256,7 @@ class FDISK(ctypes.Structure):
         actualMBR = MBR(0,0,0,0)
         tam = struct.calcsize(actualMBR.constMBR) + struct.calcsize(actualMBR.particion1.constanteParticion)*4
         #leer el mbr
-        datosMBR = Fread_displacement(self.path,0,tam)
+        datosMBR = Fread_displacement(self.path,0,tam,self.salidaConsolaWeb)
         #ahora deserealizar los datos
         actualMBR.doDeserialize(datosMBR)
         listaparticiones = [actualMBR.particion1, actualMBR.particion2, actualMBR.particion3, actualMBR.particion4]
@@ -283,7 +283,7 @@ class FDISK(ctypes.Structure):
             return
         actualEBR = EBR()
         tamanioEBR = struct.calcsize(actualEBR.constanteEBR)
-        datosEBR = Fread_displacement(self.path, temporalParticion.part_start, tamanioEBR)
+        datosEBR = Fread_displacement(self.path, temporalParticion.part_start, tamanioEBR,self.salidaConsolaWeb)
         actualEBR.doDeserialize(datosEBR)
         if actualEBR.part_name == nombre:
             if actualEBR.part_next != -1:
@@ -300,7 +300,7 @@ class FDISK(ctypes.Structure):
                 self.salidaConsolaWeb.append(f"Particion logica {nombre} eliminada con exito")
                 return
         while actualEBR.part_next != -1:
-            datosEBR = Fread_displacement(self.path, actualEBR.part_next, tamanioEBR)
+            datosEBR = Fread_displacement(self.path, actualEBR.part_next, tamanioEBR,self.salidaConsolaWeb)
             siguienteEBR = EBR()
             siguienteEBR.doDeserialize(datosEBR)
             if siguienteEBR.part_name == nombre:
