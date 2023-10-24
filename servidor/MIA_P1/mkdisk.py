@@ -75,10 +75,10 @@ class MKDISK(ctypes.Structure):
         self.set_unit(unit)
 
     def display_info(self):
-        print(f"size: {self.size}")
-        print(f"path: {self.path.decode()}") # type: ignore
-        print(f"fit: {self.fit.decode()}") # type: ignore
-        print(f"unit: {self.unit.decode()}") # type: ignore
+        self.salidaConsolaWeb.append(f"size: {self.size}")
+        self.salidaConsolaWeb.append(f"path: {self.path.decode()}") # type: ignore
+        self.salidaConsolaWeb.append(f"fit: {self.fit.decode()}") # type: ignore
+        self.salidaConsolaWeb.append(f"unit: {self.unit.decode()}") # type: ignore
     
 
     def doSerialize(self): #esto es lo que escribire en el archivo binario

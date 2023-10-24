@@ -1,0 +1,25 @@
+
+                digraph D {
+                    subgraph cluster_0 {
+                        bgcolor="#68d9e2"
+                        node [style="rounded" style=filled];
+                
+                        node_ParticionE1 [label="ParticionE1\nTipo: E\nTamaño: 6144 bytes\nPorcentaje: 0.05859375%"]
+                        
+                                    node_ParticionE1_logica1 [label="ParticionL1\nTamaño: 1024 bytes\nPorcentaje: 0.009765625%"]
+                                    
+                                    node_ParticionE1_logica2 [label="ParticionL2\nTamaño: 2048 bytes\nPorcentaje: 0.01953125%"]
+                                    
+                                    node_ParticionE1_logica3 [label="ParticionL3\nTamaño: 3072 bytes\nPorcentaje: 0.029296875%"]
+                                    
+                        node_ParticionP1 [label="ParticionP1\nTipo: P\nTamaño: 1024 bytes\nPorcentaje: 0.009765625%"]
+                        
+                        node_ParticionP2 [label="ParticionP2\nTipo: P\nTamaño: 1024 bytes\nPorcentaje: 0.009765625%"]
+                        
+                        node_ParticionP3 [label="ParticionP3\nTipo: P\nTamaño: 1024 bytes\nPorcentaje: 0.009765625%"]
+                        
+                node_Libre [label="Espacio Libre\nTamaño: 10476544 bytes\nPorcentaje: 99.912109375%"]
+                
+                    }
+                }
+                

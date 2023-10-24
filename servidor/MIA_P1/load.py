@@ -53,12 +53,12 @@ def archivoExistente(file):
         return True
 
 
-def escribirArchivoExistente(path, displacement, data):
+def escribirArchivoExistente(path, displacement, data,salidaConsolaWeb):
     try:
         with open(path, "rb+") as file:
             file.seek(displacement)
             file.write(data)
     except IOError:
-        print("Error al escribir la particion")
+        salidaConsolaWeb.append("Error al escribir la particion")
         return
     

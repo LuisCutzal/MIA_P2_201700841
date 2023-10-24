@@ -10,7 +10,7 @@ def aplicacionComandos():
         #iniciarAnalisis(input("-> "))
         iniciamos = iniciarAnalisis(input("-> "))
         #print(input)
-        iniciarAnalisis(iniciamos)
+        #iniciarAnalisis(iniciamos)
 
 if __name__ == "__main__":
     print("Luis Antonio Cutzal Chalí")

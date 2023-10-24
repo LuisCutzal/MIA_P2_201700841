@@ -3,9 +3,11 @@ from MIA_P1.EBR import *
 from MIA_P1.load import *
 import struct
 import graphviz
+import shutil
 class REP():
-    def __init__(self, listaparametros):
+    def __init__(self, listaparametros,salidaConsolaWeb):
         self.listaparametros = listaparametros
+        self.salidaConsolaWeb = salidaConsolaWeb
         self.identificador = "" #Indica el id de la partición que se utilizará
         self. path =""
         self.name = "" #Nombre del reporte a generar. 
@@ -15,10 +17,10 @@ class REP():
         
     def ejecutarRep(self, listaMount):
         if not self.agregarvalores():
-            print("El comandno rep no se pudo ejecutar correctamente")
+            self.salidaConsolaWeb.append("El comandno rep no se pudo ejecutar correctamente")
             return
         if not self.verificarNombre():
-            print("El nombre que ingreso en el comando REP no es valido")
+            self.salidaConsolaWeb.append("El nombre que ingreso en el comando REP no es valido")
             return
         if self.name == "mbr":
             self.crearGrafoMBR(listaMount)
@@ -42,34 +44,34 @@ class REP():
         return True
     def verificarNombre(self):
         if self.name == "mbr":
-            print("Generar reporte MBR")
+            self.salidaConsolaWeb.append("Generar reporte MBR")
             return True
         elif self.name == "disk":
-            print("Generar reporte DISK")
+            self.salidaConsolaWeb.append("Generar reporte DISK")
             return True
         elif self.name == "inode":
-            print("indoe")
+            self.salidaConsolaWeb.append("indoe")
             return True
         elif self.name == "Journaling":
-            print("Journaling")
+            self.salidaConsolaWeb.append("Journaling")
             return True
         elif self.name == "block":
-            print("block")
+            self.salidaConsolaWeb.append("block")
             return True
         elif self.name == "bm_inode":
-            print("bm_inode")
+            self.salidaConsolaWeb.append("bm_inode")
             return True
         elif self.name == "bm_block":
-            print("bm_block")
+            self.salidaConsolaWeb.append("bm_block")
             return True
         elif self.name == "tree":
-            print("tree")
+            self.salidaConsolaWeb.append("tree")
             return True
         elif self.name == "sb":
-            print("sb")
+            self.salidaConsolaWeb.append("sb")
             return True
         elif self.name == "file":
-            print("file")
+            self.salidaConsolaWeb.append("file")
             return True
         else: return      
     
@@ -81,7 +83,7 @@ class REP():
                 direccion= identificadores['path']
                 particion = identificadores['particion']
                 temporalMBR = MBR(0,0,0,0)
-                datos = Fread_displacement(direccion,0,struct.calcsize(temporalMBR.constMBR) + struct.calcsize(temporalMBR.particion1.constanteParticion)*4)
+                datos = Fread_displacement(direccion,0,struct.calcsize(temporalMBR.constMBR) + struct.calcsize(temporalMBR.particion1.constanteParticion)*4,self.salidaConsolaWeb)
                 temporalMBR.doDeserialize(datos) #ya tenemos los datos del mbr
                 self.temporalMBR = temporalMBR
                 listaParticiones = [self.temporalMBR.particion1,self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4]
@@ -152,7 +154,7 @@ class REP():
                         while True:
                             actualEBR = EBR()
                             tamanioEBR = struct.calcsize(actualEBR.constanteEBR)
-                            datosEBR = Fread_displacement(direccion, ebr_start, tamanioEBR)
+                            datosEBR = Fread_displacement(direccion, ebr_start, tamanioEBR,self.salidaConsolaWeb)
                             actualEBR.doDeserialize(datosEBR)
                             salida +=f""" 
                             <TR>
@@ -236,10 +238,10 @@ class REP():
                 """
                 graph = graphviz.Source(salida)
                 extencion = self.nombreArchivo.split(".")
-                graph.format = extencion[1]
-                graph.render(extencion[0], view=True)
+                graph.format = "svg"
+                graph.render(extencion[0],directory="./static/images")
                 return
-        print(f"No se encontro el Disco")
+        self.salidaConsolaWeb.append(f"No se encontro el Disco")
     
     
     def crearGrafoDisk(self, listaMount):
@@ -249,7 +251,7 @@ class REP():
                 direccion = identificadores['path']
                 particion = identificadores['particion']
                 temporalMBR = MBR(0, 0, 0, 0)
-                datos = Fread_displacement(direccion, 0, struct.calcsize(temporalMBR.constMBR) + struct.calcsize(temporalMBR.particion1.constanteParticion) * 4)
+                datos = Fread_displacement(direccion, 0, struct.calcsize(temporalMBR.constMBR) + struct.calcsize(temporalMBR.particion1.constanteParticion) * 4,self.salidaConsolaWeb)
                 temporalMBR.doDeserialize(datos)  # ya tenemos los datos del MBR
                 self.temporalMBR = temporalMBR
                 listaParticiones = [self.temporalMBR.particion1, self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4]
@@ -263,7 +265,7 @@ class REP():
                     subgraph cluster_0 {
                         bgcolor="#68d9e2"
                         node [style="rounded" style=filled];
-                """                
+                """
                 # Inicializa el contador de particiones lógicas dentro de la partición extendida
                 num_particiones_logicas = 0
                 for particion in listaParticiones:
@@ -280,7 +282,7 @@ class REP():
                             while True:
                                 actualEBR = EBR()
                                 tamanioEBR = struct.calcsize(actualEBR.constanteEBR)
-                                datosEBR = Fread_displacement(direccion, ebr_start, tamanioEBR)
+                                datosEBR = Fread_displacement(direccion, ebr_start, tamanioEBR,self.salidaConsolaWeb)
                                 actualEBR.doDeserialize(datosEBR)
                                 if actualEBR.part_status == "1":
                                     num_particiones_logicas += 1
@@ -305,10 +307,10 @@ class REP():
                 # Crea y muestra el grafo DOT
                 graph = graphviz.Source(salida)
                 extencion = self.nombreArchivo.split(".")
-                graph.format = extencion[1]
-                graph.render(extencion[0], view=True)
+                graph.format = "svg"
+                graph.render(extencion[0],directory="./static/images")
                 return
-        print(f"No se encontro el Disco")
+        self.salidaConsolaWeb.append(f"No se encontro el Disco")
     # Asegúrate de que la función tenga acceso a las definiciones de MBR, Fread_displacement, y EBR según tu implementación actual.
 
                     

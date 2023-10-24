@@ -6,6 +6,7 @@ from MIA_P1.rep import *
 from MIA_P1.rmdisk import *
 from MIA_P1.fdisk import *
 from MIA_P1.mount import *
+from MIA_P1.unmount import *
 from MIA_P1.mkfs import *
 from MIA_P1.utilities import *
 palabrasReservadas = {"execute":"EXECUTE",
@@ -21,8 +22,10 @@ palabrasReservadas = {"execute":"EXECUTE",
                       "delete" : "DELETE",
                       "add" : "ADD",
                       "mount" : "MOUNT",
+                      "unmount" : "UNMOUNT",
                       "id" : "ID",
                       "mkfs" : "MKFS",
+                      "fs" : "FS",
                       "pause": "PAUSE",
                       "ruta" : "RUTA",
                       "rep": "REP"}
@@ -35,6 +38,7 @@ tokens = ["IDENTIFICADOR",
           "GUION",
           "IGUAL",
           "VALORDEPATH",
+          "FORMATEAR",
           "NOMBREARCHIVO"]+list(palabrasReservadas.values())
 
 
@@ -78,6 +82,10 @@ def t_NUMEROS(t):
     r"-?\d+"
     return t
 
+def t_FORMATEAR(t):
+    r"(2fs|3fs)"
+    return t
+
 t_ignore = " \t\r"
 
 def t_nuevalinea(t):
@@ -85,7 +93,8 @@ def t_nuevalinea(t):
     t.lexer.lineno += t.value.count("\n")
     
 def t_error(t):
-    salidaConsolaWeb.append(f'Error Lexico:'+t.value[0]+' en la linea: '+str(t.lineno) +' en la columna: '+str(find_column(input, t))) # type: ignore
+    print(f'Error Lexico:'+t.value[0]+' en la linea: '+str(t.lineno) +' en la columna: '+str(find_column(input, t)))
+    salidaConsolaWeb.append(f'Error Lexico:'+t.value[0]+' en la linea: '+str(t.lineno) +' en la columna: '+str(find_column(input, t)))
     t.lexer.skip(1)
 
 def find_column(input, token):
@@ -121,12 +130,13 @@ def p_instruccion(t):
                    | comandormdisk
                    | comandofdisk
                    | comandomount
+                   | comandounmount
                    | comandomkfs'''
     t[0] = t[1]
 
 def p_instruccuion_pausa(t):
     '''instruccion : PAUSE'''
-    ejecutarPause()
+    ejecutarPause(salidaConsolaWeb)
     t[0] = ""
 
 def p_comandoexecute(t):
@@ -188,7 +198,7 @@ def p_comentarios(t):
 
 def p_rep(t):
     '''comandorep : REP listaparametros_rep'''
-    REP(t[2]).ejecutarRep(listaMount)
+    REP(t[2],salidaConsolaWeb).ejecutarRep(listaMount)
     t[0]= ""
     
 def p_listaparametros_rep(t):
@@ -281,6 +291,23 @@ def p_parametromount(t):
                        | GUION parametroname'''
     t[0] = t[2]
 
+def p_comandounmount(t):
+    '''comandounmount : UNMOUNT listaids_unmount'''
+    UNMOUNT(t[2],salidaConsolaWeb).ejecutarUNMOUNT(listaMount)
+    t[0]=""
+
+def p_listaids_unmount(t):
+    '''listaids_unmount : listaids_unmount parametrounmount
+                        | parametrounmount'''
+    if len(t) == 3:
+        t[1].append(t[2])
+        t[0] = t[1]
+    else:
+        t[0] = [t[1]]
+        
+def p_parametrounmount(t):
+    '''parametrounmount : GUION parametroid'''
+    t[0] = t[2]
 
 def p_parametroid(t):
     '''parametroid : ID IGUAL IDENTIFICADOR'''
@@ -302,9 +329,22 @@ def p_listaparametros_mkfs(t):
 
 def p_parametromkfs(t):
     '''parametromkfs : GUION parametroid
-                     | GUION parametrotype'''
+                     | GUION parametrotype
+                     | GUION parametrofs'''
     t[0] = t[2]
 
+def p_parametrofs(t):
+    '''parametrofs : FS IGUAL FORMATEAR'''
+    t[0] = {"valorfs" : t[3]}
+
+def p_error(t):
+    if t:
+        salidaConsolaWeb.append(f"Error sintáctico en el token '{t.value}' en la línea {t.lineno}")
+    else:
+        salidaConsolaWeb.append("Error sintáctico inesperado al final del input")
+
+
+ 
 def iniciarAnalisis(comando):
     global salidaConsolaWeb
     global input
@@ -316,7 +356,7 @@ def iniciarAnalisis(comando):
     parser = sintactico.yacc()
     salIDENTIFICADORa = parser.parse(comando)
     if salIDENTIFICADORa == None:
-        return []
-
+        return salidaConsolaWeb
+    
     return salidaConsolaWeb
 

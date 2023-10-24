@@ -38,5 +38,5 @@ def convertirValoresFit(valorFit):
     else: print(f"el valor {valorFit} de fit no es valido")
     
     
-def ejecutarPause():
-    print("pause")
+def ejecutarPause(salidaConsolaWeb):
+    salidaConsolaWeb.append("pause")
