@@ -9,6 +9,9 @@ from MIA_P1.mount import *
 from MIA_P1.unmount import *
 from MIA_P1.mkfs import *
 from MIA_P1.utilities import *
+from MIA_P1.login import *
+from MIA_P1.logOut import *
+from MIA_P1.mkgrp import *
 palabrasReservadas = {"execute":"EXECUTE",
                       "mkdisk": "MKDISK",
                       "path": "PATH",
@@ -28,7 +31,12 @@ palabrasReservadas = {"execute":"EXECUTE",
                       "fs" : "FS",
                       "pause": "PAUSE",
                       "ruta" : "RUTA",
-                      "rep": "REP"}
+                      "rep": "REP",
+                      "login": "LOGIN",
+                      "user" : "USER",
+                      "pass" : "PASS",
+                      "logout" : "LOGOUT",
+                      "mkgrp" : "MKGRP"}
 
 tokens = ["IDENTIFICADOR",
           "COMILLAS",
@@ -131,7 +139,9 @@ def p_instruccion(t):
                    | comandofdisk
                    | comandomount
                    | comandounmount
-                   | comandomkfs'''
+                   | comandomkfs
+                   | comandologin
+                   | comandomkgrp'''
     t[0] = t[1]
 
 def p_instruccuion_pausa(t):
@@ -225,7 +235,7 @@ def p_parametroruta(t):
     
 def p_comandormdisk(t):
     '''comandormdisk : RMDISK GUION parametropath'''
-    RMDISK().ejecutarRMDISK(t[3])
+    RMDISK(salidaConsolaWeb).ejecutarRMDISK(t[3])
     t[0]=""
     
 
@@ -337,6 +347,45 @@ def p_parametrofs(t):
     '''parametrofs : FS IGUAL FORMATEAR'''
     t[0] = {"valorfs" : t[3]}
 
+def p_comandologin(t):
+    '''comandologin : LOGIN listaparametros_login'''
+    LoginFront(t[2],salidaConsolaWeb).ejecutarLoginFront()
+    t[0]=""
+
+def p_listaparametros_login(t):
+    '''listaparametros_login : listaparametros_login parametrologin
+                            | parametrologin'''
+    if len(t) == 3:
+        t[1].append(t[2])
+        t[0] = t[1]
+    else:
+        t[0] = [t[1]]
+        
+def p_parametrologin(t):
+    '''parametrologin : GUION parametrouser
+                      | GUION parametropassword
+                      | GUION parametroid'''
+    t[0] = t[2]
+
+def p_parametrouser(t):
+    '''parametrouser : USER IGUAL IDENTIFICADOR '''
+    t[0] = {"valorpassword" : t[3]}
+
+def p_parametropassword(t):
+    '''parametropassword : PASS IGUAL IDENTIFICADOR '''
+    t[0] = {"valoruser" : t[3]}
+    
+def p_comandologinout(t):
+    '''instruccion : LOGOUT'''
+    ejecutarLogOut(salidaConsolaWeb)
+    t[0] = ""
+
+def p_comandomkgrp(t):
+    '''comandomkgrp : MKGRP GUION parametrouser'''
+    MK_GRP(t[3],salidaConsolaWeb).ejecutarGrupo()
+    t[0]=""
+    
+    
 def p_error(t):
     if t:
         salidaConsolaWeb.append(f"Error sintáctico en el token '{t.value}' en la línea {t.lineno}")

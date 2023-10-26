@@ -46,7 +46,7 @@ class MKDISK(ctypes.Structure):
             #print("error, MKDISK fit no se aceptan los valores")
             self.salidaConsolaWeb.append("error, MKDISK fit no se aceptan los valores")
             return
-        if self.unit != "K" and self.unit != "M":
+        if self.unit.lower() != "k" and self.unit.lower() != "m":
             #print("error, MKDISK unit no se aceptan los valores")
             self.salidaConsolaWeb.append("error, MKDISK unit no se aceptan los valores")
             return
@@ -59,7 +59,7 @@ class MKDISK(ctypes.Structure):
         Crrfile = open(self.path,"rb+")
         desplazamiento = 0
         self.calcularValoresSize()
-        nuevoMBR = MBR(self.size,tiempo(),randomVal(1,100),convertirstringaBin(convertirValoresFit(self.fit)))
+        nuevoMBR = MBR(self.size,tiempo(),randomVal(1,100),convertirstringaBin(convertirValoresFit(self.fit,self.salidaConsolaWeb)))
         datos = nuevoMBR.doSerialize()
         Winit_size(Crrfile,self.size,self.salidaConsolaWeb )
         Fwrite_displacement(Crrfile,desplazamiento,datos) #archivo, desplazamiento y valores en binario

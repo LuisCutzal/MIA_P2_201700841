@@ -49,29 +49,20 @@ class REP():
         elif self.name == "disk":
             self.salidaConsolaWeb.append("Generar reporte DISK")
             return True
-        elif self.name == "inode":
-            self.salidaConsolaWeb.append("indoe")
-            return True
-        elif self.name == "Journaling":
-            self.salidaConsolaWeb.append("Journaling")
-            return True
-        elif self.name == "block":
-            self.salidaConsolaWeb.append("block")
-            return True
         elif self.name == "bm_inode":
-            self.salidaConsolaWeb.append("bm_inode")
+            self.salidaConsolaWeb.append("Generar reporte bm_inode")
             return True
         elif self.name == "bm_block":
-            self.salidaConsolaWeb.append("bm_block")
+            self.salidaConsolaWeb.append("Generar reporte bm_block")
             return True
         elif self.name == "tree":
-            self.salidaConsolaWeb.append("tree")
+            self.salidaConsolaWeb.append("Generar reporte tree")
             return True
         elif self.name == "sb":
-            self.salidaConsolaWeb.append("sb")
+            self.salidaConsolaWeb.append("Generar reporte sb")
             return True
         elif self.name == "file":
-            self.salidaConsolaWeb.append("file")
+            self.salidaConsolaWeb.append("Generar reporte file")
             return True
         else: return      
     

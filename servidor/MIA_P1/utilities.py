@@ -28,14 +28,14 @@ def convertirTiempoEntero(fecha):
 def deBinaString(datoBinario):
     return datoBinario.decode().rstrip('\x00')
 
-def convertirValoresFit(valorFit):
-    if valorFit == "BF":
+def convertirValoresFit(valorFit,salidaConsolaWeb):
+    if valorFit.lower() == "bf":
         return "B"
-    elif valorFit == "FF":
+    elif valorFit.lower() == "ff":
         return "F"
-    elif valorFit == "WF":
+    elif valorFit.lower() == "wf":
         return "W"
-    else: print(f"el valor {valorFit} de fit no es valido")
+    else: salidaConsolaWeb.append(f"el valor {valorFit} de fit no es valido")
     
     
 def ejecutarPause(salidaConsolaWeb):

@@ -62,24 +62,12 @@ class MOUNT(ctypes.Structure):
         actualEBR = EBR()
         particionExtendida = self.retornarExtendida(listaparticiones)
         tam = struct.calcsize(actualEBR.constanteEBR)
-        datosEBR = Fread_displacement(self.path,particionExtendida.part_start,tam, self.salidaConsolaWeb) #type:ignore
-        actualEBR.doDeserialize(datosEBR)
-        self.temportalEBR = actualEBR
-        if actualEBR.part_name == self.name: #primera particion
-            contador +=1
-            datosMount = {
-                "path":self.path,
-                "id": self.generarIdParticion(contador),
-                "particion": actualEBR
-            }
-            listaMount.append(datosMount)
-            self.salidaConsolaWeb.append(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
-            return True
-        contador +=1    
-        while actualEBR.part_next != -1:
-            actualEBR.doDeserialize(Fread_displacement(self.path, actualEBR.part_next, tam,self.salidaConsolaWeb))
-            contador +=1
-            if actualEBR.part_name == self.name:
+        if particionExtendida is not None:
+            datosEBR = Fread_displacement(self.path,particionExtendida.part_start,tam, self.salidaConsolaWeb)
+            actualEBR.doDeserialize(datosEBR)
+            self.temportalEBR = actualEBR
+            if actualEBR.part_name == self.name: #primera particion
+                contador +=1
                 datosMount = {
                     "path":self.path,
                     "id": self.generarIdParticion(contador),
@@ -88,7 +76,20 @@ class MOUNT(ctypes.Structure):
                 listaMount.append(datosMount)
                 self.salidaConsolaWeb.append(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
                 return True
-        return False
+            contador +=1    
+            while actualEBR.part_next != -1:
+                actualEBR.doDeserialize(Fread_displacement(self.path, actualEBR.part_next, tam,self.salidaConsolaWeb))
+                contador +=1
+                if actualEBR.part_name == self.name:
+                    datosMount = {
+                        "path":self.path,
+                        "id": self.generarIdParticion(contador),
+                        "particion": actualEBR
+                    }
+                    listaMount.append(datosMount)
+                    self.salidaConsolaWeb.append(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
+                    return True
+            return False
 
     def generarIdParticion(self, numParticion,):
         nombre = self.nombrearchivo.split(".")
