@@ -16,5 +16,4 @@ class MKFS(ctypes.Structure):
                 self.id = val.get("valorid")
             elif val.get("valortype") != None:
                 self.type = val.get("valortype")
-
         print(self.id)

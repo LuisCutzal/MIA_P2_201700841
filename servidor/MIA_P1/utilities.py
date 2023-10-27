@@ -1,6 +1,7 @@
 import random
 import math
 import datetime
+import struct
 
 def coding_str(string,size):
     return string.encode('utf-8')[:size].ljust(size, b'\0')
@@ -40,3 +41,9 @@ def convertirValoresFit(valorFit,salidaConsolaWeb):
     
 def ejecutarPause(salidaConsolaWeb):
     salidaConsolaWeb.append("pause")
+    
+
+
+def calcularVal_N(tambParticion, tamBloque, tamInodo, tamContent):
+    n = (tambParticion - (tamBloque)) / (4 + (tamInodo) + 3 * (tamContent))
+    return math.floor(n)

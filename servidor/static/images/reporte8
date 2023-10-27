@@ -1,0 +1,17 @@
+
+                digraph D {
+                    subgraph cluster_0 {
+                        bgcolor="#68d9e2"
+                        node [style="rounded" style=filled];
+                
+                        node_Part26 [label="Part26\nTipo: P\nTamaño: 4194304 bytes\nPorcentaje: 40.0%"]
+                        
+                        node_Part27 [label="Part27\nTipo: P\nTamaño: 4194304 bytes\nPorcentaje: 40.0%"]
+                        
+                        node_Part28 [label="Part28\nTipo: P\nTamaño: 1048576 bytes\nPorcentaje: 10.0%"]
+                        
+                node_Libre [label="Espacio Libre\nTamaño: 1048576 bytes\nPorcentaje: 10.0%"]
+                
+                    }
+                }
+                

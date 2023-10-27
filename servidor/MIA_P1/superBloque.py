@@ -24,43 +24,43 @@ class SuperBloque(ctypes.Structure):
         self.s_block_start=0
         self.constanteSuperBloque = '17I'
         
+    def doSerialize(self):
+        objetoSuperBloque = struct.pack(
+            self.constanteSuperBloque,
+            self.s_filesystem_type,
+            self.s_inodes_count,
+            self.s_blocks_count,
+            self.s_free_blocks_count,
+            self.s_free_inodes_count,
+            self.s_mtime,
+            self.s_umtime,
+            self.s_mnt_count,
+            self.s_magic,
+            self.s_inode_s,
+            self.s_block_s,
+            self.s_firts_ino,
+            self.s_first_blo,
+            self.s_bm_inode_start,
+            self.s_bm_block_start,
+            self.s_inode_start,
+            self.s_block_start            
+        )
+        return objetoSuperBloque
+    
+    def doDeserialize(self, data):
+        sizeContent = struct.calcsize(self.constanteSuperBloque)
+        datoBinario = data[:sizeContent]
+        self.s_filesystem_type,self.s_inodes_count,self.s_blocks_count,self.s_free_blocks_count,self.s_free_inodes_count,self.s_mtime,self.s_umtime,self.s_mnt_count,self.s_magic,self.s_inode_s,self.s_block_s,self.s_firts_ino,self.s_first_blo,self.s_bm_inode_start,self.s_bm_block_start,self.s_inode_start,self.s_block_start = struct.unpack(self.constanteSuperBloque,datoBinario)
+        return self
+        
+        
         
         
         
         """
-        def calculate_value_of_n(self, size_partition, super_block, inode, content):
-        n = (size_partition - struct.calcsize(super_block.FORMATSUPERBLOCK)) / (4 + struct.calcsize(inode.FORMARTINODETABLE) + 3 * struct.calcsize(content.FORMARTCONTENT)*4)
-        return math.floor(n)
-        """
-        
-        """ 
-        class Bitmap:
-            def __init__(self)->None:
-                self._FORMATBITMAPINODE = "c"
-                self.size_bitmap = 0
-                self.array_bitmap = []
-        def serialize_bitmap(self, array_bitmap, size_bitmap):
-                if len(array_bitmap) == 0:
-                    self.size_bitmap = size_bitmap
-                    self._FORMATBITMAPINODE = str(self.size_bitmap) + self._FORMATBITMAPINODE
-                    self.array_bitmap = [b'0'] * self.size_bitmap
-                else:
-        self.size_bitmap = len(array_bitmap)
-                    self.array_bitmap = [fn([]).string_to_bytes(item) for item in array_bitmap]
-                    self._FORMATBITMAPINODE = str(len(self.array_bitmap)) + self._FORMATBITMAPINODE    
-                fns = fn([])
-        return fns.serialize(self._FORMATBITMAPINODE, *self.array_bitmap)
-        
-            def deserialize_bitmap(self, data, size_bitmap):
-            if len(data) != size_bitmap:
-                print("Error al deserializar bitmap de inodos no coincide con el tamaño")
-                return None
-    self.size_bitmap = size_bitmap
-            self._FORMATBITMAPINODE = str(self.size_bitmap) + self._FORMATBITMAPINODE
-            data = fn([]).deserialize(self._FORMATBITMAPINODE, data)
-    if data is None:
-                print("Error al deserializar bitmap de inodos")
-                return None
-            self.array_bitmap = [fn([]).bytes_to_string(item) for item in data]
-            return self
+        superbloque -> superbloque
+        bitmap inodos -> array
+        bitmapbloques -> array
+        inodos -> tablaInodos
+        bloques -> bloquearchivo, bloquecarpeta
         """

@@ -1,7 +1,12 @@
+from ast import Not
+import struct
 from flask import Flask, jsonify, request, url_for
 from flask_cors import CORS
-from MIA_P1.content import *
+from MIA_P1.bitmap import *
+from MIA_P1.superBloque import *
+from MIA_P1.tablaInodos import *
 from MIA_P1.bloqueCarpeta import *
+from MIA_P1.bloqueArchivo import *
 import os
 from MIA_P1.ArchivoComandos import iniciarAnalisis
 app = Flask(__name__)
@@ -58,23 +63,10 @@ def getpermission(permission):
     return user_permission, group_permission, other_permission
 
 if __name__ == '__main__':
-    app.run(debug=True)
-    """contenido = content()
-    contenido2 = content()
-    contenido3 = content()
-    contenido4 = content()
-    contenido.set_valores('folder',1)
-    contenido2.set_valores('folder2',2)
-    contenido3.set_valores('folder3',3)
-    contenido4.set_valores('folder4',4)
-    blarpeta = bloqueCarpeta()
-    blarpeta.set_valores([contenido,contenido2,contenido3,contenido4])
-    #print(blarpeta.doSerialize())
-    otro = blarpeta.doSerialize()
-    contenidoCarpeta = blarpeta.doDeserialize(otro).b_content
-    for i in contenidoCarpeta:
-        print(i.b_inodo,i.b_name)"""
-    #print(getpermission(755))
+    #app.run(debug=True)
     
+    funcionN = calcularVal_N(7*1024*1024,struct.calcsize(SuperBloque().constanteSuperBloque),struct.calcsize(TablaInodos().constanteTablaInodos),struct.calcsize(bloqueArchivo().constanteBloqueArchivo))
     
-    
+    print(struct.calcsize(SuperBloque().constanteSuperBloque)+funcionN+3*funcionN+funcionN*struct.calcsize(TablaInodos().constanteTablaInodos)+3*funcionN*struct.calcsize(bloqueArchivo().constanteBloqueArchivo))
+    print(funcionN)
+    print(7*1024*1024)
