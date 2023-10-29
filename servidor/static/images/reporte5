@@ -1,0 +1,45 @@
+
+                digraph D {
+                    subgraph cluster_0 {
+                        bgcolor="#68d9e2"
+                        node [style="rounded" style=filled];
+                
+                        node_Part8 [label="Part8\nTipo: P\nTamaño: 10485760 bytes\nPorcentaje: 20.0%"]
+                        
+                        node_Part9 [label="Part9\nTipo: P\nTamaño: 10485760 bytes\nPorcentaje: 20.0%"]
+                        
+                        node_Part10 [label="Part10\nTipo: P\nTamaño: 5242880 bytes\nPorcentaje: 10.0%"]
+                        
+                        node_Part11 [label="Part11\nTipo: E\nTamaño: 20971520 bytes\nPorcentaje: 40.0%"]
+                        
+                                    node_Part11_logica1 [label="Part12\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                                    node_Part11_logica2 [label="Part13\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                                    node_Part11_logica3 [label="Part14\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                                    node_Part11_logica4 [label="Part15\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                                    node_Part11_logica5 [label="Part16\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                                    node_Part11_logica6 [label="Part17\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                                    node_Part11_logica7 [label="Part18\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                                    node_Part11_logica8 [label="Part19\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                                    node_Part11_logica9 [label="Part20\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                                    node_Part11_logica10 [label="Part21\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                                    node_Part11_logica11 [label="Part22\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                                    node_Part11_logica12 [label="Part23\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                                    node_Part11_logica13 [label="Part24\nTamaño: 1572864 bytes\nPorcentaje: 3.0%"]
+                                    
+                node_Libre [label="Espacio Libre\nTamaño: 5242880 bytes\nPorcentaje: 10.0%"]
+                
+                    }
+                }
+                

@@ -7,7 +7,7 @@
                 <TD bgcolor="yellow">REPORTE MBR</TD>
                 </TR>
                 <TR>
-                <TD bgcolor="yellow">mbr_tamano</TD><TD bgcolor="yellow">10485760</TD>
+                <TD bgcolor="yellow">mbr_tamano</TD><TD bgcolor="yellow">52428800</TD>
                 </TR>
                 <TR>
                 <TD bgcolor="yellow">mbr_fecha_creacion</TD>
@@ -16,7 +16,7 @@
                 
                 <TR>
                 <TD bgcolor="yellow">mbr_disk_signature</TD>
-                <TD bgcolor="yellow">97</TD>
+                <TD bgcolor="yellow">98</TD>
                 </TR>
                 <TR>
                 <TD bgcolor="purple">Particion</TD>
@@ -38,7 +38,7 @@
                         
                         <TR>
                         <TD bgcolor="yellow"> part fit </TD>
-                        <TD bgcolor="yellow"> W </TD>
+                        <TD bgcolor="yellow"> B </TD>
                         </TR>
                         
                         <TR>
@@ -48,12 +48,12 @@
                         
                         <TR>
                         <TD bgcolor="yellow"> part size </TD>
-                        <TD bgcolor="yellow"> 4194304 </TD>
+                        <TD bgcolor="yellow"> 10485760 </TD>
                         </TR>
                         
                         <TR>
                         <TD bgcolor="yellow"> part name </TD>
-                        <TD bgcolor="yellow"> Part26 </TD>
+                        <TD bgcolor="yellow"> Part1 </TD>
                         </TR>
                         
                         <TR>
@@ -72,22 +72,22 @@
                         
                         <TR>
                         <TD bgcolor="yellow"> part fit </TD>
-                        <TD bgcolor="yellow"> W </TD>
+                        <TD bgcolor="yellow"> B </TD>
                         </TR>
                         
                         <TR>
                         <TD bgcolor="yellow"> part start </TD>
-                        <TD bgcolor="yellow"> 4194429 </TD>
+                        <TD bgcolor="yellow"> 10485885 </TD>
                         </TR>
                         
                         <TR>
                         <TD bgcolor="yellow"> part size </TD>
-                        <TD bgcolor="yellow"> 4194304 </TD>
+                        <TD bgcolor="yellow"> 10485760 </TD>
                         </TR>
                         
                         <TR>
                         <TD bgcolor="yellow"> part name </TD>
-                        <TD bgcolor="yellow"> Part27 </TD>
+                        <TD bgcolor="yellow"> Part2 </TD>
                         </TR>
                         
                         <TR>
@@ -106,22 +106,56 @@
                         
                         <TR>
                         <TD bgcolor="yellow"> part fit </TD>
-                        <TD bgcolor="yellow"> W </TD>
+                        <TD bgcolor="yellow"> B </TD>
                         </TR>
                         
                         <TR>
                         <TD bgcolor="yellow"> part start </TD>
-                        <TD bgcolor="yellow"> 8388733 </TD>
+                        <TD bgcolor="yellow"> 20971645 </TD>
                         </TR>
                         
                         <TR>
                         <TD bgcolor="yellow"> part size </TD>
-                        <TD bgcolor="yellow"> 1048576 </TD>
+                        <TD bgcolor="yellow"> 10485760 </TD>
                         </TR>
                         
                         <TR>
                         <TD bgcolor="yellow"> part name </TD>
-                        <TD bgcolor="yellow"> Part28 </TD>
+                        <TD bgcolor="yellow"> Part3 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="purple">Particion</TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part status </TD>
+                        <TD bgcolor="yellow"> 1 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part type </TD>
+                        <TD bgcolor="yellow"> P </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part fit </TD>
+                        <TD bgcolor="yellow"> B </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part start </TD>
+                        <TD bgcolor="yellow"> 31457405 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part size </TD>
+                        <TD bgcolor="yellow"> 10485760 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part name </TD>
+                        <TD bgcolor="yellow"> Part4 </TD>
                         </TR>
                         
 

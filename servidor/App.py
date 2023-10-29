@@ -63,10 +63,10 @@ def getpermission(permission):
     return user_permission, group_permission, other_permission
 
 if __name__ == '__main__':
-    #app.run(debug=True)
+    app.run(debug=True)
     
-    funcionN = calcularVal_N(7*1024*1024,struct.calcsize(SuperBloque().constanteSuperBloque),struct.calcsize(TablaInodos().constanteTablaInodos),struct.calcsize(bloqueArchivo().constanteBloqueArchivo))
+    """funcionN = calcularVal_N(7*1024*1024,struct.calcsize(SuperBloque().constanteSuperBloque),struct.calcsize(TablaInodos().constanteTablaInodos),struct.calcsize(bloqueArchivo().constanteBloqueArchivo))
     
     print(struct.calcsize(SuperBloque().constanteSuperBloque)+funcionN+3*funcionN+funcionN*struct.calcsize(TablaInodos().constanteTablaInodos)+3*funcionN*struct.calcsize(bloqueArchivo().constanteBloqueArchivo))
     print(funcionN)
-    print(7*1024*1024)
+    print(7*1024*1024)"""

@@ -1,0 +1,603 @@
+
+                digraph G {
+                a1 [shape=none label=<
+                <TABLE cellspacing="10" cellpadding="10" 
+                style="rounded" bgcolor="red">
+                <TR>
+                <TD bgcolor="yellow">REPORTE MBR</TD>
+                </TR>
+                <TR>
+                <TD bgcolor="yellow">mbr_tamano</TD><TD bgcolor="yellow">52428800</TD>
+                </TR>
+                <TR>
+                <TD bgcolor="yellow">mbr_fecha_creacion</TD>
+                <TD bgcolor="yellow">2023-10-28 21:52:50</TD>
+                </TR>
+                
+                <TR>
+                <TD bgcolor="yellow">mbr_disk_signature</TD>
+                <TD bgcolor="yellow">27</TD>
+                </TR>
+                <TR>
+                <TD bgcolor="purple">Particion</TD>
+                </TR>
+                
+                        <TR>
+                        <TD bgcolor="purple">Particion</TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part status </TD>
+                        <TD bgcolor="yellow"> 1 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part type </TD>
+                        <TD bgcolor="yellow"> P </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part fit </TD>
+                        <TD bgcolor="yellow"> B </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part start </TD>
+                        <TD bgcolor="yellow"> 125 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part size </TD>
+                        <TD bgcolor="yellow"> 10485760 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part name </TD>
+                        <TD bgcolor="yellow"> Part8 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="purple">Particion</TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part status </TD>
+                        <TD bgcolor="yellow"> 1 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part type </TD>
+                        <TD bgcolor="yellow"> P </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part fit </TD>
+                        <TD bgcolor="yellow"> F </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part start </TD>
+                        <TD bgcolor="yellow"> 10485885 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part size </TD>
+                        <TD bgcolor="yellow"> 10485760 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part name </TD>
+                        <TD bgcolor="yellow"> Part9 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="purple">Particion</TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part status </TD>
+                        <TD bgcolor="yellow"> 1 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part type </TD>
+                        <TD bgcolor="yellow"> P </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part fit </TD>
+                        <TD bgcolor="yellow"> W </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part start </TD>
+                        <TD bgcolor="yellow"> 20971645 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part size </TD>
+                        <TD bgcolor="yellow"> 5242880 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part name </TD>
+                        <TD bgcolor="yellow"> Part10 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part status </TD>
+                        <TD bgcolor="yellow"> 1 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part type </TD>
+                        <TD bgcolor="yellow"> E </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part fit </TD>
+                        <TD bgcolor="yellow"> W </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part start </TD>
+                        <TD bgcolor="yellow"> 26214525 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part size </TD>
+                        <TD bgcolor="yellow"> 20971520 </TD>
+                        </TR>
+                        
+                        <TR>
+                        <TD bgcolor="yellow"> part name </TD>
+                        <TD bgcolor="yellow"> Part11 </TD>
+                        </TR>
+                        
+                         
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> 27787389 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> W </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 26214525 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part12 </TD>
+                                </TR>
+                                 
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> 29360253 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> B </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 27787389 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part13 </TD>
+                                </TR>
+                                 
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> 30933117 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> F </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 29360253 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part14 </TD>
+                                </TR>
+                                 
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> 32505981 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> B </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 30933117 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part15 </TD>
+                                </TR>
+                                 
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> 34078845 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> W </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 32505981 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part16 </TD>
+                                </TR>
+                                 
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> 35651709 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> B </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 34078845 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part17 </TD>
+                                </TR>
+                                 
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> 37224573 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> F </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 35651709 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part18 </TD>
+                                </TR>
+                                 
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> 38797437 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> B </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 37224573 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part19 </TD>
+                                </TR>
+                                 
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> 40370301 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> F </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 38797437 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part20 </TD>
+                                </TR>
+                                 
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> 41943165 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> B </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 40370301 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part21 </TD>
+                                </TR>
+                                 
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> 43516029 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> W </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 41943165 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part22 </TD>
+                                </TR>
+                                 
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> 45088893 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> B </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 43516029 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part23 </TD>
+                                </TR>
+                                 
+                            <TR>
+                            <TD bgcolor="purple">Particion Logica</TD>
+                            </TR>
+                            
+                                <TR>
+                                <TD bgcolor="yellow"> part status </TD>
+                                <TD bgcolor="yellow"> 1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part next </TD>
+                                <TD bgcolor="yellow"> -1 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part fit </TD>
+                                <TD bgcolor="yellow"> F </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part start </TD>
+                                <TD bgcolor="yellow"> 45088893 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part size </TD>
+                                <TD bgcolor="yellow"> 1572864 </TD>
+                                </TR>
+                                
+                                <TR>
+                                <TD bgcolor="yellow"> part name </TD>
+                                <TD bgcolor="yellow"> Part24 </TD>
+                                </TR>
+                                
+
+                </TABLE>>];
+                }
+                

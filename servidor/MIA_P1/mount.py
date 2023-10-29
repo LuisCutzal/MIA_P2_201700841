@@ -19,8 +19,6 @@ class MOUNT(ctypes.Structure):
         if not self.validarMount():
             self.salidaConsolaWeb.append("Error, no se pudo ejecutar el comando mount")
             return
-        if self.contieneValores(listaMount):
-            return      
         self.leerMBR()
         if self.temporalMBR == "":
             self.salidaConsolaWeb.append("Error, no se encuentra el MBR del archivo")
@@ -29,10 +27,6 @@ class MOUNT(ctypes.Structure):
             self.salidaConsolaWeb.append(f"No se encontro la particion {self.name}")
             return
         
-    def contieneValores(self, listaMount):
-        if listaMount:
-            return True
-        else: return False
    
     def validarMount(self):
         for val in self.listaParametros:
@@ -61,13 +55,28 @@ class MOUNT(ctypes.Structure):
         #aca se coloca la parte del nombre de la particion
         actualEBR = EBR()
         particionExtendida = self.retornarExtendida(listaparticiones)
+        if particionExtendida is None:
+            self.salidaConsolaWeb.append("Error, PARTICION NO EXISTE")
+            return
         tam = struct.calcsize(actualEBR.constanteEBR)
-        if particionExtendida is not None:
-            datosEBR = Fread_displacement(self.path,particionExtendida.part_start,tam, self.salidaConsolaWeb)
-            actualEBR.doDeserialize(datosEBR)
-            self.temportalEBR = actualEBR
-            if actualEBR.part_name == self.name: #primera particion
-                contador +=1
+        datosEBR = Fread_displacement(self.path,particionExtendida.part_start,tam,self.salidaConsolaWeb)
+        actualEBR.doDeserialize(datosEBR)
+        self.temportalEBR = actualEBR
+        if actualEBR.part_name == self.name: #primera particion
+            contador +=1
+            datosMount = {
+                "path":self.path,
+                "id": self.generarIdParticion(contador),
+                "particion": actualEBR
+            }
+            listaMount.append(datosMount)
+            self.salidaConsolaWeb.append(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
+            return True
+        contador +=1    
+        while actualEBR.part_next != -1:
+            actualEBR.doDeserialize(Fread_displacement(self.path, actualEBR.part_next, tam,self.salidaConsolaWeb))
+            contador +=1
+            if actualEBR.part_name == self.name:
                 datosMount = {
                     "path":self.path,
                     "id": self.generarIdParticion(contador),
@@ -76,21 +85,8 @@ class MOUNT(ctypes.Structure):
                 listaMount.append(datosMount)
                 self.salidaConsolaWeb.append(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
                 return True
-            contador +=1    
-            while actualEBR.part_next != -1:
-                actualEBR.doDeserialize(Fread_displacement(self.path, actualEBR.part_next, tam,self.salidaConsolaWeb))
-                contador +=1
-                if actualEBR.part_name == self.name:
-                    datosMount = {
-                        "path":self.path,
-                        "id": self.generarIdParticion(contador),
-                        "particion": actualEBR
-                    }
-                    listaMount.append(datosMount)
-                    self.salidaConsolaWeb.append(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
-                    return True
-            return False
-
+        return False
+        
     def generarIdParticion(self, numParticion,):
         nombre = self.nombrearchivo.split(".")
         return "41"+str(numParticion)+nombre[0]
@@ -98,19 +94,26 @@ class MOUNT(ctypes.Structure):
     def buscarParticion(self,listaMount):
         listaParticiones = [self.temporalMBR.particion1,self.temporalMBR.particion2, self.temporalMBR.particion3, self.temporalMBR.particion4] # type: ignore
         contadorparticion = 0
-        for particion in listaParticiones: #para particiones primarias
+        for particion in listaParticiones: #para particiones primarias         
             if particion.part_name == self.name:
                 datosMount = {
                     "path":self.path,
                     "id": self.generarIdParticion(contadorparticion),
                     "particion": particion
                 }
+                for mnt in listaMount:
+                    if mnt["id"] == datosMount["id"]:
+                        self.salidaConsolaWeb.append(f"Error, ya existe una particion con el mismo id: {mnt['id']} montada")
+                        return
                 listaMount.append(datosMount)
                 self.salidaConsolaWeb.append(f"Se monto la particion {self.name} con identificador {datosMount['id']}")
                 return True
             contadorparticion +=1
+        for particion in listaParticiones:
+            if particion.part_type.lower() == "e":
+                return self.montarLogica(listaParticiones,listaMount,contadorparticion)
         #comienza particiones logicas
-        return self.montarLogica(listaParticiones,listaMount,contadorparticion)
+        #return self.montarLogica(listaParticiones,listaMount,contadorparticion)
     
 """
 ultimos digitos carnet + numero particion + nombredisco

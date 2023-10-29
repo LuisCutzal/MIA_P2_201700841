@@ -27,13 +27,13 @@
 <text text-anchor="start" x="30.5" y="-1110.8" font-family="Times,serif" font-size="14.00">mbr_fecha_creacion</text>
 <polygon fill="yellow" stroke="transparent" points="193.5,-1096 193.5,-1133 364.5,-1133 364.5,-1096 193.5,-1096"/>
 <polygon fill="none" stroke="black" points="193.5,-1096 193.5,-1133 364.5,-1133 364.5,-1096 193.5,-1096"/>
-<text text-anchor="start" x="204.5" y="-1110.8" font-family="Times,serif" font-size="14.00">2023&#45;10&#45;26 14:49:13</text>
+<text text-anchor="start" x="204.5" y="-1110.8" font-family="Times,serif" font-size="14.00">2023&#45;10&#45;28 21:52:50</text>
 <polygon fill="yellow" stroke="transparent" points="19.5,-1049 19.5,-1086 183.5,-1086 183.5,-1049 19.5,-1049"/>
 <polygon fill="none" stroke="black" points="19.5,-1049 19.5,-1086 183.5,-1086 183.5,-1049 19.5,-1049"/>
 <text text-anchor="start" x="31" y="-1063.8" font-family="Times,serif" font-size="14.00">mbr_disk_signature</text>
 <polygon fill="yellow" stroke="transparent" points="193.5,-1049 193.5,-1086 364.5,-1086 364.5,-1049 193.5,-1049"/>
 <polygon fill="none" stroke="black" points="193.5,-1049 193.5,-1086 364.5,-1086 364.5,-1049 193.5,-1049"/>
-<text text-anchor="start" x="269.5" y="-1063.8" font-family="Times,serif" font-size="14.00">73</text>
+<text text-anchor="start" x="269.5" y="-1063.8" font-family="Times,serif" font-size="14.00">97</text>
 <polygon fill="purple" stroke="transparent" points="19.5,-1002 19.5,-1039 183.5,-1039 183.5,-1002 19.5,-1002"/>
 <polygon fill="none" stroke="black" points="19.5,-1002 19.5,-1039 183.5,-1039 183.5,-1002 19.5,-1002"/>
 <text text-anchor="start" x="69.5" y="-1016.8" font-family="Times,serif" font-size="14.00">Particion</text>
